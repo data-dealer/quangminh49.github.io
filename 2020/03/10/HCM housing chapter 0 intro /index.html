@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>HCM housing chapter 0 - Intro | Minh&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="keywords" content="data-scienceHCM-housing" />
+
+
+
+
+  <meta name="description"
+    content="Bất động sản là một lĩnh vực mình rất hứng thú, đặc biệt mấy năm gần đây tình hình bất động sản có sự tăng trưởng cực lớn, thị trường đã bùng nổ vào năm 2019, sang năm 2020 thì đã có sự chững lại cùng">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="HCM housing chapter 0 - Intro">
+  <meta property="og:url"
+    content="https://quangminh49.github.io/2020/03/10/HCM%20housing%20chapter%200%20intro%20/index.html">
+  <meta property="og:site_name" content="Minh&#39;s Blog">
+  <meta property="og:description"
+    content="Bất động sản là một lĩnh vực mình rất hứng thú, đặc biệt mấy năm gần đây tình hình bất động sản có sự tăng trưởng cực lớn, thị trường đã bùng nổ vào năm 2019, sang năm 2020 thì đã có sự chững lại cùng">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://quangminh49.github.io/img/hcm_housing_chapter0_thumb.png">
+  <meta property="article:published_time" content="2020-03-09T17:00:00.000Z">
+  <meta property="article:modified_time" content="2021-04-27T14:02:21.798Z">
+  <meta property="article:author" content="Minh Nguyen">
+  <meta property="article:tag" content="data-science">
+  <meta property="article:tag" content="HCM-housing">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://quangminh49.github.io/img/hcm_housing_chapter0_thumb.png">
+
+  <link rel="alternate" href="/atom.xml" title="Minh&#39;s Blog" type="application/atom+xml">
+
+  <link rel="icon" href="/css/images/favicon.ico">
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet"
+    type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face {
+      font-family: futura-pt;
+      src: url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: futura-pt;
+      src: url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: futura-pt;
+      src: url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");
+      font-weight: lighter;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: futura-pt;
+      src: url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");
+      font-weight: 400;
+      font-style: italic;
+    }
+  </style>
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css"
+    href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css"
+    media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css"
+    href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" href="/css/style.css">
+
+
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+  <meta name="generator" content="Hexo 5.4.0">
+</head>
+
+
+
+<body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+
+
+
+  <header id="allheader" class="site-header" role="banner">
+    <div class="clearfix container">
+      <div class="site-branding">
+
+        <h1 class="site-title">
+
+          <a href="/" title="Minh&#39;s Blog" rel="home"> Minh&#39;s Blog </a>
+
+        </h1>
+
+
+
+        <nav id="main-navigation" class="main-navigation" role="navigation">
+          <a class="nav-open">Menu</a>
+          <a class="nav-close">Close</a>
+
+          <div class="clearfix sf-menu">
+            <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+
+              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
+                linktext="/"> <a class="" href="/">Home</a> </li>
+
+              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
+                linktext="archives"> <a class="" href="/archives">Archives</a> </li>
+
+              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
+                linktext="/tags/data-science"> <a class="" href="/tags/data-science">data science</a> </li>
+
+              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
+                linktext="about"> <a class="" href="/about">About</a> </li>
+
+            </ul>
+          </div>
+        </nav>
+
+      </div>
+    </div>
+  </header>
+
+
+  <div id="container">
+    <div id="wrap">
+
+      <div id="content" class="outer">
+
+        <section id="main" style="float:none;">
+          <article id="post-HCM housing chapter 0 intro " style="width: 66%; float:left;"
+            class="article article-type-post" itemscope itemprop="blogPost">
+            <div id="articleInner"
+              class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+
+              <div class="article-gallery">
+                <div class="article-gallery-photos">
+
+                  <a class="article-gallery-img fancybox" href="/img/hcm_housing_chapter0_thumb.png"
+                    rel="gallery_cko03wuuq0009tbph34lghznm">
+                    <img src="/img/hcm_housing_chapter0_thumb.png" itemprop="image">
+                  </a>
+
+                </div>
+              </div>
+
+
+              <header class="article-header">
+
+
+                <h1 class="thumb" class="article-title" itemprop="name">
+                  HCM housing chapter 0 - Intro
+                </h1>
+
+
+              </header>
+
+              <div class="article-meta">
+
+                <a href="/2020/03/10/HCM%20housing%20chapter%200%20intro%20/" class="article-date">
+                  <time datetime="2020-03-09T17:00:00.000Z" itemprop="datePublished">March 10, 2020</time>
+                </a>
+
+
+
+              </div>
+              <div class="article-entry" itemprop="articleBody">
+
+                <p>Bất động sản là một lĩnh vực mình rất hứng thú, đặc biệt mấy năm gần đây tình hình bất động sản có sự
+                  tăng trưởng cực lớn, thị trường đã bùng nổ vào năm 2019, sang năm 2020 thì đã có sự chững lại cùng với
+                  đại dịch Covid 19.</p>
+                <p>Thị trường biến động là thế nhưng chỉ ngồi nghe thì có lẽ chúng ta sẽ không bao giờ hiểu được chuyện
+                  gì đang diễn ra ngoài thị trường kia, bản thân tôi thì cũng không đủ tiền để trực tiếp tham gia thị
+                  trường vào lúc này, và sẽ thật đáng tiếc nếu bỏ qua gia đoạn đầy thách thức và cơ hội này. </p>
+                <p>Nhưng vẫn còn hy vọng, data về các tin đăng rao bán bất động sản thì tràn ngập trên mạng, và may thay
+                  tôi cũng có chút kỹ năng để thu thập và xử lý chúng. Vì đó series <strong>HCM housing</strong> ra đời
+                  nhằm thỏa mãn niềm đam mê của bản thân và tìm ra các cơ hội đầu tư và cũng là một case study để thấy
+                  được data science có tính ứng dụng mạnh thế nào.</p>
+                <span id="more"></span>
+
+                <p>Nguồn data trong toàn series mình crawl từ trang web <a target="_blank" rel="noopener"
+                    href="https://batdongsan.com.vn/">https://batdongsan.com.vn/</a>, code và data mình có để trên
+                  github của mình, nếu bạn nào hứng thú thì có thể clone về nghịch thử. Trong series này mình sẽ không
+                  nói đến việc crawl data mà chủ yếu đề cập đến xử lý và phân tích số liệu.</p>
+                <h2 id="Buoc-1-Clearn-data-1-chut"><a href="#Buoc-1-Clearn-data-1-chut" class="headerlink"
+                    title="Bước 1 : Clearn data 1 chút"></a>Bước 1 : Clearn data 1 chút</h2>
+                <ul>
+                  <li>Đầu tiên bỏ cột không dùng tới lúc này đi cho gọn ( lúc này chưa dùng thôi nhé)</li>
+                </ul>
+                <p>Đổi tên cột nghe cho tây tây (và dễ gọi)</p>
+                <div>
+                  <style scoped>
+                    .dataframe tbody tr th:only-of-type {
+                      vertical-align: middle;
+                    }
+
+                    <pre><code>.dataframe tbody tr th &#123;
+                    vertical-align: top;
+                    font-size: 10px;
+                    &#125;
+
+                    .dataframe thead th &#123;
+                    text-align: right;
+                    &#125;
+                    </code></pre><p>
+                  </style>
+                  </p>
+                  <table border="1" class="dataframe">
+                    <thead>
+                      <tr style="text-align: right;">
+                        <th></th>
+                        <th>0</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>Loại tin rao</th>
+                        <td>Bán nhà riêng</td>
+                      </tr>
+                      <tr>
+                        <th>Địa chỉ</th>
+                        <td>Đường 13, Thủ Đức, Hồ Chí Minh</td>
+                      </tr>
+                      <tr>
+                        <th>Hướng nhà</th>
+                        <td>Đông-Bắc</td>
+                      </tr>
+                      <tr>
+                        <th>Số tầng</th>
+                        <td>1(tầng)</td>
+                      </tr>
+                      <tr>
+                        <th>email</th>
+                        <td>lehoakhanhhoa87@gmail.com</td>
+                      </tr>
+                      <tr>
+                        <th>title</th>
+                        <td>Bán nhà đường 13, Linh Xuân, Nhà 1 trệt 1 lửng...</td>
+                      </tr>
+                      <tr>
+                        <th>Mã tin đăng</th>
+                        <td>24908353</td>
+                      </tr>
+                      <tr>
+                        <th>Loại hình tin đăng</th>
+                        <td>Tin thường</td>
+                      </tr>
+                      <tr>
+                        <th>Ngày đăng</th>
+                        <td>2020-03-25 00:00:00</td>
+                      </tr>
+                      <tr>
+                        <th>Ngày hết hạn</th>
+                        <td>2020-01-04 00:00:00</td>
+                      </tr>
+                      <tr>
+                        <th>long</th>
+                        <td>106.756</td>
+                      </tr>
+                      <tr>
+                        <th>lat</th>
+                        <td>10.8533</td>
+                      </tr>
+                      <tr>
+                        <th>district</th>
+                        <td>Thủ Đức</td>
+                      </tr>
+                      <tr>
+                        <th>street</th>
+                        <td>Linh Xuân</td>
+                      </tr>
+                      <tr>
+                        <th>price</th>
+                        <td>2.75 tỷ</td>
+                      </tr>
+                      <tr>
+                        <th>area</th>
+                        <td>81 m²</td>
+                      </tr>
+                      <tr>
+                        <th>uptime</th>
+                        <td>25/03/2020</td>
+                      </tr>
+                      <tr>
+                        <th>url</th>
+                        <td>/ban-nha-rieng-duong-13-phuong-linh-xuan/13-1-...</td>
+                      </tr>
+                      <tr>
+                        <th>Mặt tiền</th>
+                        <td>NaN</td>
+                      </tr>
+                      <tr>
+                        <th>Đường vào</th>
+                        <td>NaN</td>
+                      </tr>
+                      <tr>
+                        <th>Số phòng ngủ</th>
+                        <td>NaN</td>
+                      </tr>
+                      <tr>
+                        <th>Số toilet</th>
+                        <td>NaN</td>
+                      </tr>
+                      <tr>
+                        <th>Nội thất</th>
+                        <td>NaN</td>
+                      </tr>
+                      <tr>
+                        <th>Hướng ban công</th>
+                        <td>NaN</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+                <p>Xem thông tin Non-Null và kiểu dữ liệu:</p>
+                <pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 14390 entries, 0 to 14389
+Data columns (total 15 columns):
+ #   Column     Non-Null Count  Dtype         
+---  ------     --------------  -----         
+ 0   floors     9656 non-null   object        
+ 1   type       14390 non-null  object        
+ 2   up_time    14390 non-null  datetime64[ns]
+ 3   end_time   14390 non-null  datetime64[ns]
+ 4   long       14388 non-null  float64       
+ 5   lat        14388 non-null  float64       
+ 6   district   14390 non-null  object        
+ 7   street     14390 non-null  object        
+ 8   price      14390 non-null  object        
+ 9   area       14390 non-null  object        
+ 10  facade     6603 non-null   object        
+ 11  road_wide  7809 non-null   object        
+ 12  bedrooms   8261 non-null   object        
+ 13  toilets    6993 non-null   float64       
+ 14  furniture  2593 non-null   object        
+dtypes: datetime64[ns](2), float64(3), object(10)
+memory usage: 1.6+ MB
+</code></pre>
+                <p>Đổi tên giá trị biến trong trường ‘type’</p>
+                <p>Tách giá price, area từ chuỗi:</p>
+                <pre><code>tỷ          13522
+thuận         545
+triệu         255
+triệu/m²       68
+Name: price_unit, dtype: int64
+
+m²     14042
+xác      348
+Name: area_unit, dtype: int64
+</code></pre>
+                <p>Chỉ lấy các record có ‘price_unit là’ ‘tỷ’ và ‘area_unit’ là ‘m²’ và chuyển dữ liệu ‘price’ và ‘area’
+                  mới xử lý về kiểu float để tính toán:</p>
+                <div>
+                  <style scoped>
+                    .dataframe tbody tr th:only-of-type {
+                      vertical-align: middle;
+                      font-size: 10px;
+                    }
+
+                    <pre><code>.dataframe tbody tr th &#123;
+                    vertical-align: top;
+                    &#125;
+
+                    .dataframe thead th &#123;
+                    text-align: right;
+                    &#125;
+                    </code></pre><p>
+                  </style>
+                  </p>
+                  <table border="1" class="dataframe">
+                    <thead>
+                      <tr style="text-align: right;">
+                        <th></th>
+                        <th>long</th>
+                        <th>lat</th>
+                        <th>price</th>
+                        <th>area</th>
+                        <th>toilets</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>count</th>
+                        <td>13223.000000</td>
+                        <td>13223.000000</td>
+                        <td>13225.000000</td>
+                        <td>13225.000000</td>
+                        <td>6370.000000</td>
+                      </tr>
+                      <tr>
+                        <th>mean</th>
+                        <td>106.671245</td>
+                        <td>10.811026</td>
+                        <td>10.253711</td>
+                        <td>88.636981</td>
+                        <td>3.586185</td>
+                      </tr>
+                      <tr>
+                        <th>std</th>
+                        <td>0.059644</td>
+                        <td>0.348298</td>
+                        <td>177.415904</td>
+                        <td>187.661826</td>
+                        <td>2.892462</td>
+                      </tr>
+                      <tr>
+                        <th>min</th>
+                        <td>105.852447</td>
+                        <td>10.387579</td>
+                        <td>1.000000</td>
+                        <td>8.000000</td>
+                        <td>1.000000</td>
+                      </tr>
+                      <tr>
+                        <th>25%</th>
+                        <td>106.639569</td>
+                        <td>10.768930</td>
+                        <td>3.550000</td>
+                        <td>48.000000</td>
+                        <td>2.000000</td>
+                      </tr>
+                      <tr>
+                        <th>50%</th>
+                        <td>106.671258</td>
+                        <td>10.797014</td>
+                        <td>5.700000</td>
+                        <td>64.000000</td>
+                        <td>3.000000</td>
+                      </tr>
+                      <tr>
+                        <th>75%</th>
+                        <td>106.700338</td>
+                        <td>10.832499</td>
+                        <td>9.000000</td>
+                        <td>90.000000</td>
+                        <td>4.000000</td>
+                      </tr>
+                      <tr>
+                        <th>max</th>
+                        <td>106.954798</td>
+                        <td>21.028949</td>
+                        <td>19800.000000</td>
+                        <td>12600.000000</td>
+                        <td>70.000000</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+
+
+
+                <ul>
+                  <li>Tách giá trị số từ chuỗi các trường ‘floors’,’bedrooms’, ‘facade’, ‘road_wide’</li>
+                </ul>
+                <div>
+                  <style scoped>
+                    .dataframe tbody tr th:only-of-type {
+                      vertical-align: middle;
+                      font-size: 10px;
+                    }
+
+                    <pre><code>.dataframe tbody tr th &#123;
+                    vertical-align: top;
+                    &#125;
+
+                    .dataframe thead th &#123;
+                    text-align: right;
+                    &#125;
+                    </code></pre><p>
+                  </style>
+                  </p>
+                  <table border="1" class="dataframe">
+                    <thead>
+                      <tr style="text-align: right;">
+                        <th></th>
+                        <th>floors</th>
+                        <th>bedrooms</th>
+                        <th>facade</th>
+                        <th>road_wide</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>0</th>
+                        <td>1(tầng)</td>
+                        <td>NaN</td>
+                        <td>NaN</td>
+                        <td>NaN</td>
+                      </tr>
+                      <tr>
+                        <th>1</th>
+                        <td>NaN</td>
+                        <td>NaN</td>
+                        <td>NaN</td>
+                        <td>NaN</td>
+                      </tr>
+                      <tr>
+                        <th>2</th>
+                        <td>2(tầng)</td>
+                        <td>3(phòng)</td>
+                        <td>4(m)</td>
+                        <td>6,50(m)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+
+
+                <pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 13225 entries, 0 to 14389
+Data columns (total 4 columns):
+ #   Column     Non-Null Count  Dtype 
+---  ------     --------------  ----- 
+ 0   floors     8951 non-null   object
+ 1   bedrooms   7558 non-null   object
+ 2   facade     6118 non-null   object
+ 3   road_wide  7153 non-null   object
+dtypes: object(4)
+memory usage: 516.6+ KB
+</code></pre>
+                <p>Nhận thấy giá trị số sẽ bao gồm các phần tử bắt đầu cho đến ký tự ‘(‘ trong chuỗi nên ta viết hàm xử
+                  lý như dưới:</p>
+                <div>
+                  <style scoped>
+                    .dataframe tbody tr th:only-of-type {
+                      vertical-align: middle;
+                      font-size: 10px;
+                    }
+
+                    <pre><code>.dataframe tbody tr th &#123;
+                    vertical-align: top;
+                    &#125;
+
+                    .dataframe thead th &#123;
+                    text-align: right;
+                    &#125;
+                    </code></pre><p>
+                  </style>
+                  </p>
+                  <table border="1" class="dataframe">
+                    <thead>
+                      <tr style="text-align: right;">
+                        <th></th>
+                        <th>0</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>Loại tin rao</th>
+                        <td>Bán nhà riêng</td>
+                      </tr>
+                      <tr>
+                        <th>Địa chỉ</th>
+                        <td>Đường 13, Thủ Đức, Hồ Chí Minh</td>
+                      </tr>
+                      <tr>
+                        <th>Hướng nhà</th>
+                        <td>Đông-Bắc</td>
+                      </tr>
+                      <tr>
+                        <th>Số tầng</th>
+                        <td>1(tầng)</td>
+                      </tr>
+                      <tr>
+                        <th>email</th>
+                        <td>lehoakhanhhoa87@gmail.com</td>
+                      </tr>
+                      <tr>
+                        <th>title</th>
+                        <td>Bán nhà đường 13, Linh Xuân, Nhà 1 trệt 1 lửng...</td>
+                      </tr>
+                      <tr>
+                        <th>Mã tin đăng</th>
+                        <td>24908353</td>
+                      </tr>
+                      <tr>
+                        <th>Loại hình tin đăng</th>
+                        <td>Tin thường</td>
+                      </tr>
+                      <tr>
+                        <th>Ngày đăng</th>
+                        <td>2020-03-25 00:00:00</td>
+                      </tr>
+                      <tr>
+                        <th>Ngày hết hạn</th>
+                        <td>2020-01-04 00:00:00</td>
+                      </tr>
+                      <tr>
+                        <th>long</th>
+                        <td>106.756</td>
+                      </tr>
+                      <tr>
+                        <th>lat</th>
+                        <td>10.8533</td>
+                      </tr>
+                      <tr>
+                        <th>district</th>
+                        <td>Thủ Đức</td>
+                      </tr>
+                      <tr>
+                        <th>street</th>
+                        <td>Linh Xuân</td>
+                      </tr>
+                      <tr>
+                        <th>price</th>
+                        <td>2.75 tỷ</td>
+                      </tr>
+                      <tr>
+                        <th>area</th>
+                        <td>81 m²</td>
+                      </tr>
+                      <tr>
+                        <th>uptime</th>
+                        <td>25/03/2020</td>
+                      </tr>
+                      <tr>
+                        <th>url</th>
+                        <td>/ban-nha-rieng-duong-13-phuong-linh-xuan/13-1-...</td>
+                      </tr>
+                      <tr>
+                        <th>Mặt tiền</th>
+                        <td>NaN</td>
+                      </tr>
+                      <tr>
+                        <th>Đường vào</th>
+                        <td>NaN</td>
+                      </tr>
+                      <tr>
+                        <th>Số phòng ngủ</th>
+                        <td>NaN</td>
+                      </tr>
+                      <tr>
+                        <th>Số toilet</th>
+                        <td>NaN</td>
+                      </tr>
+                      <tr>
+                        <th>Nội thất</th>
+                        <td>NaN</td>
+                      </tr>
+                      <tr>
+                        <th>Hướng ban công</th>
+                        <td>NaN</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+
+                <h2 id="Buoc-2-Bieu-dien-du-lieu"><a href="#Buoc-2-Bieu-dien-du-lieu" class="headerlink"
+                    title="Bước 2 : Biểu diễn dữ liệu"></a>Bước 2 : Biểu diễn dữ liệu</h2>
+                <ul>
+                  <li>Dữ liệu khá đa dạng nhưng mình chỉ quan tâm tới các diện tích &lt; 200m2 và giá tiền &lt; 100 tỷ:
+                  </li>
+                </ul>
+                <p>Có 24 quận nên chia làm 4 dòng 6 cột vẽ cho đẹp</p>
+                <p><img src="/img/output_22_0.png" alt="Crepe"></p>
+                <p>Biểu đồ quan hệ giữa area và price theo từng quận :</p>
+                <p><img src="/img/output_24_0.png" alt="Crepe"></p>
+                <p>Các quận nội thành và phân bổ price:</p>
+                <p><img src="/img/output_25_1.png" alt="Crepe"></p>
+                <p>Tới đây thì dữ liệu cũng tàm tạm để xây dựng các mô hình dự đoán giá nhà rồi, và đó cũng sẽ là chủ để
+                  trong kỳ tới. </p>
+                <p>Mời các bạn đón đọc !</p>
+
+
+              </div>
+              <footer class="entry-meta entry-footer">
+
+
+                <span class="ico-tags"></span>
+                <ul class="article-tag-list" itemprop="keywords">
+                  <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/data-science/"
+                      rel="tag">data-science</a></li>
+                  <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HCM-housing/"
+                      rel="tag">HCM-housing</a></li>
+                </ul>
+
+
+              </footer>
+              <hr class="entry-footer-hr">
+            </div>
+
+
+            <nav id="article-nav">
+
+              <a href="/2020/03/15/HCM%20housing%20chapter%201%20Linear%20Regression/" id="article-nav-newer"
+                class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Newer</strong>
+                <div class="article-nav-title">
+
+                  HCM housing chapter 1 - Price prediction
+
+                </div>
+              </a>
+
+
+              <a href="/2020/03/04/Credit%20score%20chapter%204%20/" id="article-nav-older"
+                class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Older</strong>
+                <div class="article-nav-title">Credit Scorecard chapter 4 - Explain the Scorecard Model</div>
+              </a>
+
+            </nav>
+
+
+          </article>
+
+          <!-- Table of Contents -->
+
+          <aside id="sidebar">
+            <div id="toc" class="toc-article">
+              <strong class="toc-title">Contents</strong>
+
+              <ol class="nav">
+                <li class="nav-item nav-level-2"><a class="nav-link" href="#Buoc-1-Clearn-data-1-chut"><span
+                      class="nav-number">1.</span> <span class="nav-text">Bước 1 : Clearn data 1 chút</span></a></li>
+                <li class="nav-item nav-level-2"><a class="nav-link" href="#Buoc-2-Bieu-dien-du-lieu"><span
+                      class="nav-number">2.</span> <span class="nav-text">Bước 2 : Biểu diễn dữ liệu</span></a></li>
+              </ol>
+
+            </div>
+          </aside>
+        </section>
+
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags/data-science" class="mobile-nav-link">Data Science</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+
+
+      <div class="clearfix container">
+        <div class="site-info">
+          &copy; 2021 Minh&#39;s Blog All Rights Reserved.
+
+        </div>
+        <div class="site-credit">
+          Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- min height -->
+
+    <script>
+      var wrapdiv = document.getElementById("wrap");
+      var contentdiv = document.getElementById("content");
+
+      wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    < !--headerblur min height-- >
+
+
+    </script>
+
+    <div style="display: none;">
+      <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+    </div>
+
+    <!-- mathjax config similar to math.stackexchange -->
+
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+
+
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+    <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+    <script src="/js/script.js"></script>
+
+
+    <script src="/js/bootstrap.js"></script>
+
+
+    <script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+
+</html>
