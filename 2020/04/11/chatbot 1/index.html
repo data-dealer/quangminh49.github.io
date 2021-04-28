@@ -1,305 +1,225 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
-
+  
   <title>Rasa chatbot intro | Minh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+  
   <meta name="keywords" content="Data-ScienceNLP" />
-
-
-
-
-  <meta name="description"
-    content="Mở bài thì mình cũng lan man chút về cái thời buổi Covid khó khăn, thời gian qua mình đã nỗ lực rất nhiều nhưng vì cái đại dịch vô duyên này mà mọi chuyện rối tung hết, chẳng đâu vào đâu. Có lúc cũng">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Rasa chatbot intro">
-  <meta property="og:url" content="https://quangminh49.github.io/2020/04/11/chatbot%201/index.html">
-  <meta property="og:site_name" content="Minh&#39;s Blog">
-  <meta property="og:description"
-    content="Mở bài thì mình cũng lan man chút về cái thời buổi Covid khó khăn, thời gian qua mình đã nỗ lực rất nhiều nhưng vì cái đại dịch vô duyên này mà mọi chuyện rối tung hết, chẳng đâu vào đâu. Có lúc cũng">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:image" content="https://quangminh49.github.io/img/rasa.png">
-  <meta property="article:published_time" content="2020-04-10T17:00:00.000Z">
-  <meta property="article:modified_time" content="2021-04-27T14:01:18.021Z">
-  <meta property="article:author" content="Minh Nguyen">
-  <meta property="article:tag" content="Data-Science">
-  <meta property="article:tag" content="NLP">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:image" content="https://quangminh49.github.io/img/rasa.png">
-
-  <link rel="alternate" href="/atom.xml" title="Minh&#39;s Blog" type="application/atom+xml">
-
+  
+  
+  
+  
+  <meta name="description" content="Mở bài thì mình cũng lan man chút về cái thời buổi Covid khó khăn, thời gian qua mình đã nỗ lực rất nhiều nhưng vì cái đại dịch vô duyên này mà mọi chuyện rối tung hết, chẳng đâu vào đâu. Có lúc cũng">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rasa chatbot intro">
+<meta property="og:url" content="https://quangminh49.github.io/2020/04/11/chatbot%201/index.html">
+<meta property="og:site_name" content="Minh&#39;s Blog">
+<meta property="og:description" content="Mở bài thì mình cũng lan man chút về cái thời buổi Covid khó khăn, thời gian qua mình đã nỗ lực rất nhiều nhưng vì cái đại dịch vô duyên này mà mọi chuyện rối tung hết, chẳng đâu vào đâu. Có lúc cũng">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://quangminh49.github.io/img/rasa.png">
+<meta property="article:published_time" content="2020-04-10T17:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-27T14:01:18.021Z">
+<meta property="article:author" content="Minh Nguyen">
+<meta property="article:tag" content="Data-Science">
+<meta property="article:tag" content="NLP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://quangminh49.github.io/img/rasa.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Minh&#39;s Blog" type="application/atom+xml">
+  
   <link rel="icon" href="/css/images/favicon.ico">
-
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet"
-    type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
   <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");
-      font-weight: 500;
-      font-style: normal;
-    }
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
 
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");
-      font-weight: 500;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");
-      font-weight: lighter;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");
-      font-weight: 400;
-      font-style: italic;
-    }
-  </style>
-
-  <link rel="stylesheet" id="athemes-headings-fonts-css"
-    href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css"
-    media="all">
-
-  <link rel="stylesheet" id="athemes-headings-fonts-css"
-    href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
 
 
-
-  <script src="/js/jquery-3.1.1.min.js"></script>
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
 
 
   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.css">
-  <link rel="stylesheet" href="/css/fashion.css">
-  <link rel="stylesheet" href="/css/glyphs.css">
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
 
-  <meta name="generator" content="Hexo 5.4.0">
-</head>
-
-
-
-<body data-spy="scroll" data-target="#toc" data-offset="50">
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
-  <header id="allheader" class="site-header" role="banner">
-    <div class="clearfix container">
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
       <div class="site-branding">
 
-        <h1 class="site-title">
+          <h1 class="site-title">
+            
+              <a href="/" title="Minh&#39;s Blog" rel="home"> Minh&#39;s Blog </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
 
-          <a href="/" title="Minh&#39;s Blog" rel="home"> Minh&#39;s Blog </a>
-
-        </h1>
-
-
-
-        <nav id="main-navigation" class="main-navigation" role="navigation">
-          <a class="nav-open">Menu</a>
-          <a class="nav-close">Close</a>
-
-          <div class="clearfix sf-menu">
-            <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="/"> <a class="" href="/">Home</a> </li>
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="archives"> <a class="" href="/archives">Archives</a> </li>
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="/tags/Data-Science"> <a class="" href="/tags/Data-Science">data science</a> </li>
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="about"> <a class="" href="/about">About</a> </li>
-
-            </ul>
-          </div>
-        </nav>
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="/"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="archives"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="/tags/Data-Science"> <a class="" href="/tags/Data-Science">data science</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="about"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
 
       </div>
-    </div>
-  </header>
+  </div>
+</header>
 
 
   <div id="container">
     <div id="wrap">
-
+            
       <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-chatbot 1" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/img/rasa.png" rel="gallery_cko03wuut000mtbph6xmm2u3k">
+        <img src="/img/rasa.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
 
-        <section id="main" style="float:none;">
-          <article id="post-chatbot 1" style="width: 66%; float:left;" class="article article-type-post" itemscope
-            itemprop="blogPost">
-            <div id="articleInner"
-              class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Rasa chatbot intro
+    </h1>
+  
 
-              <div class="article-gallery">
-                <div class="article-gallery-photos">
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/04/11/chatbot%201/" class="article-date">
+	  <time datetime="2020-04-10T17:00:00.000Z" itemprop="datePublished">April 11, 2020</time>
+	</a>
 
-                  <a class="article-gallery-img fancybox" href="/img/rasa.png" rel="gallery_cko03wuut000mtbph6xmm2u3k">
-                    <img src="/img/rasa.png" itemprop="image">
-                  </a>
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Mở bài thì mình cũng lan man chút về cái thời buổi Covid khó khăn, thời gian qua mình đã nỗ lực rất nhiều nhưng vì cái đại dịch vô duyên này mà mọi chuyện rối tung hết, chẳng đâu vào đâu. Có lúc cũng suy nghĩ rằng hay mình tìm chỗ khác lương cao hơn nhưng mấy đêm suy nghĩ cũng vẫn quyết định ở lại. Vì rằng tiền thì từ từ kiếm, năng lực mình còn đó sớm muộn gì thì cũng sẽ đạt được thôi. Nhớ lại lúc ban đầu khi vào công ty cũng vì cảm thấy có niềm tin ở anh sếp, và rồi cái cảm giác đó đã đúng. Ở đây mình đã được tin tưởng, các dự án mình làm đa số được ứng dụng, nên là thời gian tuy không nhiều nhưng cũng được bào kha khá, ahihi. Nhưng chính nhờ đó mà kinh nghiệm và trình độ của mình đã tăng lên rất nhanh và sẽ còn tăng mạnh trong thời gian tới. </p>
+<span id="more"></span>
 
-                </div>
-              </div>
-
-
-              <header class="article-header">
-
-
-                <h1 class="thumb" class="article-title" itemprop="name">
-                  Rasa chatbot intro
-                </h1>
-
-
-              </header>
-
-              <div class="article-meta">
-
-                <a href="/2020/04/11/chatbot%201/" class="article-date">
-                  <time datetime="2020-04-10T17:00:00.000Z" itemprop="datePublished">April 11, 2020</time>
-                </a>
-
-
-
-              </div>
-              <div class="article-entry" itemprop="articleBody">
-
-                <p>Mở bài thì mình cũng lan man chút về cái thời buổi Covid khó khăn, thời gian qua mình đã nỗ lực rất
-                  nhiều nhưng vì cái đại dịch vô duyên này mà mọi chuyện rối tung hết, chẳng đâu vào đâu. Có lúc cũng
-                  suy nghĩ rằng hay mình tìm chỗ khác lương cao hơn nhưng mấy đêm suy nghĩ cũng vẫn quyết định ở lại. Vì
-                  rằng tiền thì từ từ kiếm, năng lực mình còn đó sớm muộn gì thì cũng sẽ đạt được thôi. Nhớ lại lúc ban
-                  đầu khi vào công ty cũng vì cảm thấy có niềm tin ở anh sếp, và rồi cái cảm giác đó đã đúng. Ở đây mình
-                  đã được tin tưởng, các dự án mình làm đa số được ứng dụng, nên là thời gian tuy không nhiều nhưng cũng
-                  được bào kha khá, ahihi. Nhưng chính nhờ đó mà kinh nghiệm và trình độ của mình đã tăng lên rất nhanh
-                  và sẽ còn tăng mạnh trong thời gian tới. </p>
-                <span id="more"></span>
-
-                <p>Vì khó khăn nên công ty quyết định cắt 25% lương và phụ cấp, chắc đợt này tổng thu nhập mình giảm
-                  khoảng 40-50% ,tuy vậy cũng quyết định hết sức cùng công ty sẽ đóng góp hết mình vào các giải pháp
-                  tình thế mà công ty đưa ra. </p>
-                <p>Nhưng mà thực sự mình cũng khó lắm, lương không cao mà giảm ngần đó sợ là không trụ nổi 2,3 tháng vừa
-                  đúng lúc hết hợp đồng. Coi như kham khổ đánh cuộc cùng công ty đi, nếu qua thời gian đấy mà không khá
-                  hơn được chắc mình cũng phải tìm đường khác chứ chắc không đủ sống. Cũng chẳng muốn đâu, nhưng hy vọng
-                  nếu sếp đọc được thì cũng hiểu cho em ạ, hiện giờ em sẽ hết mình vì công ty, nhưng đến mức đó thì em
-                  cũng sẽ nói anh trước ạ !</p>
-                <p>Chúng ta không nên đứng núi này trông núi nọ nhưng cũng nên chuẩn bị cho tình huống xấu nhất chứ. Các
-                  cụ ta có câu : “Thỏ khôn đào sẵn 3 hang” lại có câu “không sợ nhất vạn, chỉ sợ vạn nhất” mình vẫn tin
-                  tưởng rằng dù tình huống nào có xảy ra khi căn cơ mình vững chắc và chuẩn bị đầy đủ thì không có gì
-                  phải sợ hãi cả. Đó cũng là động lực để mình làm series Chatbot, vừa là bồi dưỡng căn cơ, vừa tìm thêm
-                  một phương án dự phòng. </p>
-                <h2 id="Chatbot-la-gi"><a href="#Chatbot-la-gi" class="headerlink" title="Chatbot là gì ?"></a>Chatbot
-                  là gì ?</h2>
-                <p>Chatbot là một công cụ có thể giao tiếp, tương tác với con người thông qua trí tuệ nhân tạo đã được
-                  lập trình sẵn. Trong hầu hết các trường hợp thì chatbot được sử dụng qua ứng dụng nhắn tin để nói
-                  chuyện với con người.</p>
-                <p>Chatbot có thể sử dụng như một công cụ hiệu quả giúp cho việc chăm sóc khách hàng được thực hiện tự
-                  động 24/7. Trên thực tế, chatbot nhanh hơn con người trong việc đưa ra câu trả lời. Hơn nữa, với
-                  chatbot các doanh nghiệp sẽ không cần thuê nhân viên để chăm sóc khách hàng. Điều này giúp cho chi phí
-                  marketing của doanh nghiệp được giảm xuống.</p>
-                <p>Ai nên sử dụng Chatbot?</p>
-                <p>Chatbot đang dần được ứng dụng sâu rộng vào cuộc sống cũng như kinh doanh. Đối tượng sử dụng Chatbot
-                  rất đa dạng từ cho tất cả các ngành kinh doanh nhưng tốt nhất trong các nhóm ngành như:</p>
-                <pre><code>- Kinh doanh thời trang: quần áo, trang sức, giầy dép, phụ kiện…
+<p>Vì khó khăn nên công ty quyết định cắt 25% lương và phụ cấp, chắc đợt này tổng thu nhập mình giảm khoảng 40-50% ,tuy vậy cũng quyết định hết sức cùng công ty sẽ đóng góp hết mình vào các giải pháp tình thế mà công ty đưa ra. </p>
+<p>Nhưng mà thực sự mình cũng khó lắm, lương không cao mà giảm ngần đó sợ là không trụ nổi 2,3 tháng vừa đúng lúc hết hợp đồng. Coi như kham khổ đánh cuộc cùng công ty đi, nếu qua thời gian đấy mà không khá hơn được chắc mình cũng phải tìm đường khác chứ chắc không đủ sống. Cũng chẳng muốn đâu, nhưng hy vọng nếu sếp đọc được thì cũng hiểu cho em ạ, hiện giờ em sẽ hết mình vì công ty, nhưng đến mức đó thì em cũng sẽ nói anh trước ạ !</p>
+<p>Chúng ta không nên đứng núi này trông núi nọ nhưng cũng nên chuẩn bị cho tình huống xấu nhất chứ. Các cụ ta có câu : “Thỏ khôn đào sẵn 3 hang” lại có câu “không sợ nhất vạn, chỉ sợ vạn nhất” mình vẫn tin tưởng rằng dù tình huống nào có xảy ra khi căn cơ mình vững chắc và chuẩn bị đầy đủ thì không có gì phải sợ hãi cả. Đó cũng là động lực để mình làm series Chatbot, vừa là bồi dưỡng căn cơ, vừa tìm thêm một phương án dự phòng. </p>
+<h2 id="Chatbot-la-gi"><a href="#Chatbot-la-gi" class="headerlink" title="Chatbot là gì ?"></a>Chatbot là gì ?</h2><p>Chatbot là một công cụ có thể giao tiếp, tương tác với con người thông qua trí tuệ nhân tạo đã được lập trình sẵn. Trong hầu hết các trường hợp thì chatbot được sử dụng qua ứng dụng nhắn tin để nói chuyện với con người.</p>
+<p>Chatbot có thể sử dụng như một công cụ hiệu quả giúp cho việc chăm sóc khách hàng được thực hiện tự động 24/7. Trên thực tế, chatbot nhanh hơn con người trong việc đưa ra câu trả lời. Hơn nữa, với chatbot các doanh nghiệp sẽ không cần thuê nhân viên để chăm sóc khách hàng. Điều này giúp cho chi phí marketing của doanh nghiệp được giảm xuống.</p>
+<p>Ai nên sử dụng Chatbot?</p>
+<p>Chatbot đang dần được ứng dụng sâu rộng vào cuộc sống cũng như kinh doanh. Đối tượng sử dụng Chatbot rất đa dạng từ cho tất cả các ngành kinh doanh nhưng tốt nhất trong các nhóm ngành như:</p>
+<pre><code>- Kinh doanh thời trang: quần áo, trang sức, giầy dép, phụ kiện…
 - Làm đẹp: Spa, Thẩm mỹ viện, Làm tóc, nail…
 - Ẩm thực: Nhà hàng, Quán ăn, Quán cafe…
 - Giáo dục – đào tạo: trường học, trung tâm đào tạo ngoại ngữ, kỹ năng, dạy nghề, tuyển sinh…
 - Các dịch vụ hỗ trợ: đặt phòng, đặt vé, vận tải…
 - Các dịch vụ bán hàng Online trực tuyến: Bán đủ thứ trên đời miễn là có 1 fanpage.
 </code></pre>
-                <h2 id="Y-tuong"><a href="#Y-tuong" class="headerlink" title="Ý tưởng:"></a>Ý tưởng:</h2>
-                <p>Trước mắt mình sẽ demo một con chatbot trên Facebook mang ý tưởng kết nối với nhà tuyển dụng, phòng
-                  khi tình thế khó khăn. Nó sẽ thực hiện các chức năng trả lời câu hỏi và giới thiệu về bản thân mình.
-                </p>
-                <p><strong>Nền tảng sử dụng:</strong></p>
-                <p>Đầu tiên mình dùng thư viện NLTK, mọi thứ cũng khá dễ dàng để tạo một chatbot nhưng phần kết nối với
-                  Facebook code hơi cực. Thế là mình tìm đến <strong>Rasa</strong> - nền tảng chatbot toàn diện mọi thứ
-                  trở nên đơn giản đến bất ngờ, nguồn tài liệu hướng dẫn tiếng Việt cũng rất nhiều nên các bạn có thể
-                  tạo chatbot cơ bản cho mình chỉ trong vài phút. </p>
-                <p>Sau đây là một số thành quả của mình :</p>
-                <p><img src="/img/bot_0.png" alt="Crepe"></p>
-                <p><img src="/img/bot_1.png" alt="Crepe"></p>
-                <p><img src="/img/bot_2.png" alt="Crepe"></p>
-                <p>![Crepe]/img/bot_3.png)</p>
-                <p>Demo đơn giản vậy thôi. Tuy nhiên khi chúng ta ứng dụng chatbot vào trong mô trường kinh doanh thì
-                  chúng ta còn rất nhiều vấn đề cần giải quyết. Có cơ hội mình sẽ viết ở kỳ sau</p>
+<h2 id="Y-tuong"><a href="#Y-tuong" class="headerlink" title="Ý tưởng:"></a>Ý tưởng:</h2><p>Trước mắt mình sẽ demo một con chatbot trên Facebook mang ý tưởng kết nối với nhà tuyển dụng, phòng khi tình thế khó khăn. Nó sẽ thực hiện các chức năng trả lời câu hỏi và giới thiệu về bản thân mình.</p>
+<p><strong>Nền tảng sử dụng:</strong></p>
+<p>Đầu tiên mình dùng thư viện NLTK, mọi thứ cũng khá dễ dàng để tạo một chatbot nhưng phần kết nối với Facebook code hơi cực. Thế là mình tìm đến <strong>Rasa</strong> - nền tảng chatbot toàn diện mọi thứ trở nên đơn giản đến bất ngờ, nguồn tài liệu hướng dẫn tiếng Việt cũng rất nhiều nên các bạn có thể tạo chatbot cơ bản cho mình chỉ trong vài phút. </p>
+<p>Sau đây là một số thành quả của mình :</p>
+<p><img src="/img/bot_0.png" alt="Crepe"></p>
+<p><img src="/img/bot_1.png" alt="Crepe"></p>
+<p><img src="/img/bot_2.png" alt="Crepe"></p>
+<p>![Crepe]/img/bot_3.png)</p>
+<p>Demo đơn giản vậy thôi. Tuy nhiên khi chúng ta ứng dụng chatbot vào trong mô trường kinh doanh thì chúng ta còn rất nhiều vấn đề cần giải quyết. Có cơ hội mình sẽ viết ở kỳ sau</p>
 
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Science/" rel="tag">Data-Science</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li></ul>
 
-              </div>
-              <footer class="entry-meta entry-footer">
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/22/statistic_1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Staff capacity forecast
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/05/HCM%20housing%20chapter%202/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HCM housing chapter 2 - Visualization</div>
+    </a>
+  
+</nav>
 
+  
+</article>
 
-                <span class="ico-tags"></span>
-                <ul class="article-tag-list" itemprop="keywords">
-                  <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Science/"
-                      rel="tag">Data-Science</a></li>
-                  <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/" rel="tag">NLP</a>
-                  </li>
-                </ul>
+<!-- Table of Contents -->
 
-
-              </footer>
-              <hr class="entry-footer-hr">
-            </div>
-
-
-            <nav id="article-nav">
-
-              <a href="/2020/04/22/statistic_1/" id="article-nav-newer" class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Newer</strong>
-                <div class="article-nav-title">
-
-                  Staff capacity forecast
-
-                </div>
-              </a>
-
-
-              <a href="/2020/04/05/HCM%20housing%20chapter%202/" id="article-nav-older" class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Older</strong>
-                <div class="article-nav-title">HCM housing chapter 2 - Visualization</div>
-              </a>
-
-            </nav>
-
-
-          </article>
-
-          <!-- Table of Contents -->
-
-          <aside id="sidebar">
-            <div id="toc" class="toc-article">
-              <strong class="toc-title">Contents</strong>
-
-              <ol class="nav">
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#Chatbot-la-gi"><span
-                      class="nav-number">1.</span> <span class="nav-text">Chatbot là gì ?</span></a></li>
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#Y-tuong"><span class="nav-number">2.</span>
-                    <span class="nav-text">Ý tưởng:</span></a></li>
-              </ol>
-
-            </div>
-          </aside>
-        </section>
-
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chatbot-la-gi"><span class="nav-number">1.</span> <span class="nav-text">Chatbot là gì ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Y-tuong"><span class="nav-number">2.</span> <span class="nav-text">Ý tưởng:</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
       </div>
 
     </div>
@@ -315,42 +235,42 @@
   
 </nav> -->
     <footer id="footer" class="site-footer">
+  
 
-
-      <div class="clearfix container">
-        <div class="site-info">
-          &copy; 2021 Minh&#39;s Blog All Rights Reserved.
-
-        </div>
-        <div class="site-credit">
-          Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
-        </div>
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2021 Minh&#39;s Blog All Rights Reserved.
+        
       </div>
-    </footer>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
 
 
-    <!-- min height -->
+<!-- min height -->
 
-    <script>
-      var wrapdiv = document.getElementById("wrap");
-      var contentdiv = document.getElementById("content");
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
 
-      wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-
-
-    < !--headerblur min height-- >
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
 
 
-    </script>
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
 
-    <div style="display: none;">
-      <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
-    </div>
+<!-- mathjax config similar to math.stackexchange -->
 
-    <!-- mathjax config similar to math.stackexchange -->
-
-    <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -359,7 +279,7 @@
   });
 </script>
 
-    <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       tex2jax: {
         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
@@ -367,7 +287,7 @@
     });
 </script>
 
-    <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
     MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for(i=0; i < all.length; i += 1) {
@@ -376,26 +296,26 @@
     });
 </script>
 
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+<script src="/js/script.js"></script>
 
 
-    <script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/js/bootstrap.js"></script>
 
 
-
-
-    <script src="/js/script.js"></script>
-
-
-    <script src="/js/bootstrap.js"></script>
-
-
-    <script src="/js/main.js"></script>
+<script src="/js/main.js"></script>
 
 
 
@@ -415,5 +335,4 @@
   <a id="rocket" href="#top" class=""></a>
   <script type="text/javascript" src="/js/totop.js" async=""></script>
 </body>
-
 </html>

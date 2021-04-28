@@ -1,445 +1,371 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
-
+  
   <title>Credit Scorecard chapter 2 - Machine learning | Minh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+  
   <meta name="keywords" content="Credit-ScorecardData-Science" />
-
-
-
-
-  <meta name="description"
-    content="Bài viết thứ 2 nằm trong series về Credit Scorecard trong các tổ chức tín dụng. Trong bài này chúng ta cùng tìm hiểu cách ứng dụng các mô hình Machine trong chấm điểm tín dụng cũng như tìm ra mô hình">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Credit Scorecard chapter 2 - Machine learning">
-  <meta property="og:url" content="https://quangminh49.github.io/2020/01/20/Credit%20score%20chapter%202%20/index.html">
-  <meta property="og:site_name" content="Minh&#39;s Blog">
-  <meta property="og:description"
-    content="Bài viết thứ 2 nằm trong series về Credit Scorecard trong các tổ chức tín dụng. Trong bài này chúng ta cùng tìm hiểu cách ứng dụng các mô hình Machine trong chấm điểm tín dụng cũng như tìm ra mô hình">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:image" content="https://quangminh49.github.io/img/credit_scorecard_01_thumb.png">
-  <meta property="article:published_time" content="2020-01-19T17:00:00.000Z">
-  <meta property="article:modified_time" content="2021-04-27T14:01:55.278Z">
-  <meta property="article:author" content="Minh Nguyen">
-  <meta property="article:tag" content="Credit-Scorecard">
-  <meta property="article:tag" content="Data-Science">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:image" content="https://quangminh49.github.io/img/credit_scorecard_01_thumb.png">
-
-  <link rel="alternate" href="/atom.xml" title="Minh&#39;s Blog" type="application/atom+xml">
-
+  
+  
+  
+  
+  <meta name="description" content="Bài viết thứ 2 nằm trong series về Credit Scorecard trong các tổ chức tín dụng. Trong bài này chúng ta cùng tìm hiểu cách ứng dụng các mô hình Machine trong chấm điểm tín dụng cũng như tìm ra mô hình">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Credit Scorecard chapter 2 - Machine learning">
+<meta property="og:url" content="https://quangminh49.github.io/2020/01/20/Credit%20score%20chapter%202%20/index.html">
+<meta property="og:site_name" content="Minh&#39;s Blog">
+<meta property="og:description" content="Bài viết thứ 2 nằm trong series về Credit Scorecard trong các tổ chức tín dụng. Trong bài này chúng ta cùng tìm hiểu cách ứng dụng các mô hình Machine trong chấm điểm tín dụng cũng như tìm ra mô hình">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://quangminh49.github.io/img/credit_scorecard_01_thumb.png">
+<meta property="article:published_time" content="2020-01-19T17:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-27T14:01:55.278Z">
+<meta property="article:author" content="Minh Nguyen">
+<meta property="article:tag" content="Credit-Scorecard">
+<meta property="article:tag" content="Data-Science">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://quangminh49.github.io/img/credit_scorecard_01_thumb.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Minh&#39;s Blog" type="application/atom+xml">
+  
   <link rel="icon" href="/css/images/favicon.ico">
-
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet"
-    type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
   <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");
-      font-weight: 500;
-      font-style: normal;
-    }
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
 
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");
-      font-weight: 500;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");
-      font-weight: lighter;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");
-      font-weight: 400;
-      font-style: italic;
-    }
-  </style>
-
-  <link rel="stylesheet" id="athemes-headings-fonts-css"
-    href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css"
-    media="all">
-
-  <link rel="stylesheet" id="athemes-headings-fonts-css"
-    href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
 
 
-
-  <script src="/js/jquery-3.1.1.min.js"></script>
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
 
 
   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.css">
-  <link rel="stylesheet" href="/css/fashion.css">
-  <link rel="stylesheet" href="/css/glyphs.css">
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
 
-  <meta name="generator" content="Hexo 5.4.0">
-</head>
-
-
-
-<body data-spy="scroll" data-target="#toc" data-offset="50">
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
-  <header id="allheader" class="site-header" role="banner">
-    <div class="clearfix container">
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
       <div class="site-branding">
 
-        <h1 class="site-title">
+          <h1 class="site-title">
+            
+              <a href="/" title="Minh&#39;s Blog" rel="home"> Minh&#39;s Blog </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
 
-          <a href="/" title="Minh&#39;s Blog" rel="home"> Minh&#39;s Blog </a>
-
-        </h1>
-
-
-
-        <nav id="main-navigation" class="main-navigation" role="navigation">
-          <a class="nav-open">Menu</a>
-          <a class="nav-close">Close</a>
-
-          <div class="clearfix sf-menu">
-            <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="/"> <a class="" href="/">Home</a> </li>
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="archives"> <a class="" href="/archives">Archives</a> </li>
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="/tags/Data-Science"> <a class="" href="/tags/Data-Science">data science</a> </li>
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="about"> <a class="" href="/about">About</a> </li>
-
-            </ul>
-          </div>
-        </nav>
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="/"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="archives"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="/tags/Data-Science"> <a class="" href="/tags/Data-Science">data science</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="about"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
 
       </div>
-    </div>
-  </header>
+  </div>
+</header>
 
 
   <div id="container">
     <div id="wrap">
-
+            
       <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Credit score chapter 2 " style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/img/credit_scorecard_01_thumb.png" rel="gallery_cko03wuup0006tbph8htn8a3w">
+        <img src="/img/credit_scorecard_01_thumb.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
 
-        <section id="main" style="float:none;">
-          <article id="post-Credit score chapter 2 " style="width: 66%; float:left;" class="article article-type-post"
-            itemscope itemprop="blogPost">
-            <div id="articleInner"
-              class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Credit Scorecard chapter 2 - Machine learning
+    </h1>
+  
 
-              <div class="article-gallery">
-                <div class="article-gallery-photos">
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/20/Credit%20score%20chapter%202%20/" class="article-date">
+	  <time datetime="2020-01-19T17:00:00.000Z" itemprop="datePublished">January 20, 2020</time>
+	</a>
 
-                  <a class="article-gallery-img fancybox" href="/img/credit_scorecard_01_thumb.png"
-                    rel="gallery_cko03wuup0006tbph8htn8a3w">
-                    <img src="/img/credit_scorecard_01_thumb.png" itemprop="image">
-                  </a>
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Bài viết thứ 2 nằm trong series về <strong>Credit Scorecard</strong> trong các tổ chức tín dụng. Trong bài này chúng ta cùng tìm hiểu cách ứng dụng các mô hình Machine trong chấm điểm tín dụng cũng như tìm ra mô hình tối ưu nhất. </p>
+<span id="more"></span>
 
-                </div>
-              </div>
+<p><strong>Credit Scorecard</strong> với mục tiêu là chấm điểm và phân loại khách hàng, cho phép đưa ra quyết định về chính sách can thiệp nhằm tối ưu hóa hiệu quả kinh doanh.</p>
+<p>Mục tiêu gồm : </p>
+<ol>
+<li>Các phương pháp chuyển dạng, chuẩn hóa dữ liệu</li>
+<li>Giới thiệu các thuật toán machine learning cơ bản </li>
+<li>Turning model sử dụng GridSearchCV và tìm ra mô hình tối ưu</li>
+</ol>
+<hr>
+<h2 id="Buoc-1-Data-preprocessing"><a href="#Buoc-1-Data-preprocessing" class="headerlink" title="Bước 1: Data preprocessing"></a>Bước 1: Data preprocessing</h2><p>Do dữ liệu đã được clean nên chúng ta đến thẳng bước tranform data để chuẩn bị training model machine learning</p>
+<h3 id="OneHotEncoder"><a href="#OneHotEncoder" class="headerlink" title="OneHotEncoder"></a>OneHotEncoder</h3><p>Kỹ thuật onehot (hay dummy) là kỹ thuật chuyển dạng dữ liệu từ dạng <strong>chuỗi</strong> sang dạng bool mà vẫn giữ nguyên được giá trị thông tin của dữ liệu. Với phương thức là với mỗi giá trị trong trường dữ liệu cũ ta tạo một trường dữ liệu mới thể hiện rằng dữ liệu tại đó có bằng giá trị đó không. </p>
+<p>Chúng ta sẽ thấy rõ nó hoạt động thế nào sau bước dưới đây:</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
 
-              <header class="article-header">
-
-
-                <h1 class="thumb" class="article-title" itemprop="name">
-                  Credit Scorecard chapter 2 - Machine learning
-                </h1>
-
-
-              </header>
-
-              <div class="article-meta">
-
-                <a href="/2020/01/20/Credit%20score%20chapter%202%20/" class="article-date">
-                  <time datetime="2020-01-19T17:00:00.000Z" itemprop="datePublished">January 20, 2020</time>
-                </a>
-
-
-
-              </div>
-              <div class="article-entry" itemprop="articleBody">
-
-                <p>Bài viết thứ 2 nằm trong series về <strong>Credit Scorecard</strong> trong các tổ chức tín dụng.
-                  Trong bài này chúng ta cùng tìm hiểu cách ứng dụng các mô hình Machine trong chấm điểm tín dụng cũng
-                  như tìm ra mô hình tối ưu nhất. </p>
-                <span id="more"></span>
-
-                <p><strong>Credit Scorecard</strong> với mục tiêu là chấm điểm và phân loại khách hàng, cho phép đưa ra
-                  quyết định về chính sách can thiệp nhằm tối ưu hóa hiệu quả kinh doanh.</p>
-                <p>Mục tiêu gồm : </p>
-                <ol>
-                  <li>Các phương pháp chuyển dạng, chuẩn hóa dữ liệu</li>
-                  <li>Giới thiệu các thuật toán machine learning cơ bản </li>
-                  <li>Turning model sử dụng GridSearchCV và tìm ra mô hình tối ưu</li>
-                </ol>
-                <hr>
-                <h2 id="Buoc-1-Data-preprocessing"><a href="#Buoc-1-Data-preprocessing" class="headerlink"
-                    title="Bước 1: Data preprocessing"></a>Bước 1: Data preprocessing</h2>
-                <p>Do dữ liệu đã được clean nên chúng ta đến thẳng bước tranform data để chuẩn bị training model machine
-                  learning</p>
-                <h3 id="OneHotEncoder"><a href="#OneHotEncoder" class="headerlink"
-                    title="OneHotEncoder"></a>OneHotEncoder</h3>
-                <p>Kỹ thuật onehot (hay dummy) là kỹ thuật chuyển dạng dữ liệu từ dạng <strong>chuỗi</strong> sang dạng
-                  bool mà vẫn giữ nguyên được giá trị thông tin của dữ liệu. Với phương thức là với mỗi giá trị trong
-                  trường dữ liệu cũ ta tạo một trường dữ liệu mới thể hiện rằng dữ liệu tại đó có bằng giá trị đó không.
-                </p>
-                <p>Chúng ta sẽ thấy rõ nó hoạt động thế nào sau bước dưới đây:</p>
-                <div>
-                  <style scoped>
-                    .dataframe tbody tr th:only-of-type {
-                      vertical-align: middle;
-                    }
-
-                    <pre><code>.dataframe tbody tr th &#123;
-                    vertical-align: top;
-                    &#125;
-
-                    .dataframe thead th &#123;
-                    text-align: right;
-                    &#125;
-                    </code></pre><p>
-                  </style>
-                  </p>
-                  <table border="1" class="dataframe">
-                    <thead>
-                      <tr style="text-align: right;">
-                        <th></th>
-                        <th>field2</th>
-                        <th>field3</th>
-                        <th>field9</th>
-                        <th>field10</th>
-                        <th>field13</th>
-                        <th>field35</th>
-                        <th>field38</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>0</th>
-                        <td>field2_v0</td>
-                        <td>field3_v0</td>
-                        <td>field9_v0</td>
-                        <td>field10_v0</td>
-                        <td>field13_v0</td>
-                        <td>field35_v0</td>
-                        <td>field38_v0</td>
-                      </tr>
-                      <tr>
-                        <th>1</th>
-                        <td>field2_v1</td>
-                        <td>field3_v0</td>
-                        <td>field9_v0</td>
-                        <td>field10_v1</td>
-                        <td>field13_v1</td>
-                        <td>field35_v0</td>
-                        <td>field38_v1</td>
-                      </tr>
-                      <tr>
-                        <th>2</th>
-                        <td>field2_v2</td>
-                        <td>field3_v1</td>
-                        <td>field9_v0</td>
-                        <td>field10_v2</td>
-                        <td>field13_v2</td>
-                        <td>field35_v0</td>
-                        <td>field38_v2</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>field2</th>
+      <th>field3</th>
+      <th>field9</th>
+      <th>field10</th>
+      <th>field13</th>
+      <th>field35</th>
+      <th>field38</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>field2_v0</td>
+      <td>field3_v0</td>
+      <td>field9_v0</td>
+      <td>field10_v0</td>
+      <td>field13_v0</td>
+      <td>field35_v0</td>
+      <td>field38_v0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>field2_v1</td>
+      <td>field3_v0</td>
+      <td>field9_v0</td>
+      <td>field10_v1</td>
+      <td>field13_v1</td>
+      <td>field35_v0</td>
+      <td>field38_v1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>field2_v2</td>
+      <td>field3_v1</td>
+      <td>field9_v0</td>
+      <td>field10_v2</td>
+      <td>field13_v2</td>
+      <td>field35_v0</td>
+      <td>field38_v2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 
 
 
 
-                <p>data sau khi OneHotEncoder:</p>
-                <div>
-                  <style scoped>
-                    .dataframe tbody tr th:only-of-type {
-                      vertical-align: middle;
-                    }
+<p>data sau khi OneHotEncoder:</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-                    <pre><code>.dataframe tbody tr th &#123;
-                    vertical-align: top;
-                    &#125;
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
 
-                    .dataframe thead th &#123;
-                    text-align: right;
-                    &#125;
-                    </code></pre><p>
-                  </style>
-                  </p>
-                  <table border="1" class="dataframe">
-                    <thead>
-                      <tr style="text-align: right;">
-                        <th></th>
-                        <th>field2_field2_v0</th>
-                        <th>field2_field2_v1</th>
-                        <th>field2_field2_v2</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>0</th>
-                        <td>1.0</td>
-                        <td>0.0</td>
-                        <td>0.0</td>
-                      </tr>
-                      <tr>
-                        <th>1</th>
-                        <td>0.0</td>
-                        <td>1.0</td>
-                        <td>0.0</td>
-                      </tr>
-                      <tr>
-                        <th>2</th>
-                        <td>0.0</td>
-                        <td>0.0</td>
-                        <td>1.0</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>field2_field2_v0</th>
+      <th>field2_field2_v1</th>
+      <th>field2_field2_v2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 
 
 
-                <h3 id="MinMaxScaler"><a href="#MinMaxScaler" class="headerlink" title="MinMaxScaler"></a>MinMaxScaler
-                </h3>
-                <p>Là kỹ thuật chuẩn hóa dữ liệu phổ biến cho các dữ liệu <strong>Numeric</strong>. Với cơ chế là đưa dữ
-                  liệu về 1 thang đo mới<br>vd: <em>MinMaxScaler(feature_range=(-1,1))</em></p>
-                <ul>
-                  <li>-1 : giá trị nhỏ nhất </li>
-                  <li> 1 : giá trị lớn nhất </li>
-                </ul>
-                <p><strong>Tại sao chuẩn hóa dữ liệu lại cẩn thiết ?</strong> </p>
-                <p>Vì khi tính toán với nhiều trường dữ liệu khác nhau thì sẽ có các phép toán kiểu như :
-                  <strong>age</strong> + <strong>loan</strong><br>Giả sử khách hàng 45 tuổi và vay 50 triệu thì việc lấy
-                  số 45 tuổi + 50 triệu có sự bất đồng lớn về thang đo tính toán
-                </p>
-                <p>Do vậy ta cần đưa <strong>age</strong> và <strong>loan</strong> về cùng thang đo (-1,1) để đạt được
-                  hiệu quả cao khi traing model</p>
-                <h2 id="Buoc-2-MODEL"><a href="#Buoc-2-MODEL" class="headerlink" title="Bước 2 : MODEL"></a>Bước 2 :
-                  MODEL</h2>
-                <p>Sau khi dữ liệu đã sạch sẽ thơm tho thì chún ta có thể đem đi xào nấu thỏa thích với đủ thể loại
-                  thuật toán machine learning</p>
-                <p>Việc đầu tiên chúng ta cần làm là chia tệp dữ liệu thành các bộ traing_set và test_set:</p>
-                <h2 id="Define-models-and-gridsearchs"><a href="#Define-models-and-gridsearchs" class="headerlink"
-                    title="Define models and gridsearchs"></a>Define models and gridsearchs</h2>
-                <p><em>Chỉ có 1 cách để biết được mô hình nào là tốt nhất là thử nghiệm thật nhiều loại mô hình.</em>
-                </p>
-                <p>Nhưng lại có một vấn để như sau: </p>
-                <p>Giả sử ta muốn tìm mô hình tốt hơn giữ mô hình Logistic và mô hình KNN, vậy đầu tiên ta phải tìm được
-                  mô hình Logistic tốt nhất và mô hình KNN tốt nhất, sau đó mới so sánh chúng với nhau để tìm ra cái tốt
-                  hơn trong những cái tốt.</p>
-                <p>Nghe hơi rối não nhưng ở đây chúng ta sẽ đề cạp đến 2 khái niệm để giải thích vấn đề này: </p>
-                <p><strong>Parameter</strong> vs <strong>Hyper Parameter</strong>:</p>
-                <ul>
-                  <li><strong>Parameter</strong> : Tham số trong các phương trình tối ưu của thuật toán ,<br>vd: khi
-                    chúng ta xét hàm tuyến tính: f(x) = a*x + b thì a và b chính là các Parameter </li>
-                </ul>
-                <p>=&gt; chúng ta cần tìm các parameter để mô hình fit với tập dữ liệu</p>
-                <ul>
-                  <li><strong>Hyper Parameter</strong>: Siêu tham số trong các mô hình machine learning<br>vd: khi chúng
-                    ta định nghĩa mô hình RandomForestClassifier(max_features=’sqrt’, criterion=’gini’)<br>Thì
-                    max_features và criterion là các hyper parameter của mô hình là các rule, thuật toán cụ thể mô hình
-                    sẽ sử dụng</li>
-                </ul>
-                <p>=&gt; chúng ta cần tìm các hyper parameter để tìm ra bộ setup tốt nhất cho mô hình machine
-                  learning<br>GridSearchCV tìm kiếm hyper parameter tối ưu qua bộ param_grid truyền vào bằng cách chạy
-                  từng trường hợp của bộ<br>param và lựa chọn params cho score tốt nhất</p>
-                <p><strong>Thực hiện GridSearchCV cho từng thuật toán và so sánh kết quả theo AUC</strong></p>
-                <div>
-                  <style scoped>
-                    .dataframe tbody tr th:only-of-type {
-                      vertical-align: middle;
-                    }
 
-                    <pre><code>.dataframe tbody tr th &#123;
-                    vertical-align: top;
-                    &#125;
+<h3 id="MinMaxScaler"><a href="#MinMaxScaler" class="headerlink" title="MinMaxScaler"></a>MinMaxScaler</h3><p>Là kỹ thuật chuẩn hóa dữ liệu phổ biến cho các dữ liệu <strong>Numeric</strong>. Với cơ chế là đưa dữ liệu về 1 thang đo mới<br>vd: <em>MinMaxScaler(feature_range=(-1,1))</em></p>
+<ul>
+<li>-1 : giá trị nhỏ nhất </li>
+<li>  1 : giá trị lớn nhất </li>
+</ul>
+<p><strong>Tại sao chuẩn hóa dữ liệu lại cẩn thiết ?</strong> </p>
+<p>Vì khi tính toán với nhiều trường dữ liệu khác nhau thì sẽ có các phép toán kiểu như : <strong>age</strong> + <strong>loan</strong><br>Giả sử khách hàng 45 tuổi và vay 50 triệu thì việc lấy số 45 tuổi + 50 triệu có sự bất đồng lớn về thang đo tính toán</p>
+<p>Do vậy ta cần đưa <strong>age</strong> và <strong>loan</strong> về cùng thang đo (-1,1) để đạt được hiệu quả cao khi traing model</p>
+<h2 id="Buoc-2-MODEL"><a href="#Buoc-2-MODEL" class="headerlink" title="Bước 2 : MODEL"></a>Bước 2 : MODEL</h2><p>Sau khi dữ liệu đã sạch sẽ thơm tho thì chún ta có thể đem đi xào nấu thỏa thích với đủ thể loại thuật toán machine learning</p>
+<p>Việc đầu tiên chúng ta cần làm là chia tệp dữ liệu thành các bộ traing_set và test_set:</p>
+<h2 id="Define-models-and-gridsearchs"><a href="#Define-models-and-gridsearchs" class="headerlink" title="Define models and gridsearchs"></a>Define models and gridsearchs</h2><p><em>Chỉ có 1 cách để biết được mô hình nào là tốt nhất là thử nghiệm thật nhiều loại mô hình.</em></p>
+<p>Nhưng lại có một vấn để như sau: </p>
+<p>Giả sử ta muốn tìm mô hình tốt hơn giữ mô hình Logistic và mô hình KNN, vậy đầu tiên ta phải tìm được mô hình Logistic tốt nhất và mô hình KNN tốt nhất, sau đó mới so sánh chúng với nhau để tìm ra cái tốt hơn trong những cái tốt.</p>
+<p>Nghe hơi rối não nhưng ở đây chúng ta sẽ đề cạp đến 2 khái niệm để giải thích vấn đề này: </p>
+<p><strong>Parameter</strong> vs <strong>Hyper Parameter</strong>:</p>
+<ul>
+<li><strong>Parameter</strong> : Tham số trong các phương trình tối ưu của thuật toán ,<br>vd: khi chúng ta xét hàm tuyến tính: f(x) = a*x + b thì a và b chính là các Parameter </li>
+</ul>
+<p>=&gt; chúng ta cần tìm các parameter để mô hình fit với tập dữ liệu</p>
+<ul>
+<li><strong>Hyper Parameter</strong>: Siêu tham số trong các mô hình machine learning<br>vd: khi chúng ta định nghĩa mô hình RandomForestClassifier(max_features=’sqrt’, criterion=’gini’)<br>Thì max_features và criterion là các hyper parameter của mô hình là các rule, thuật toán cụ thể mô hình sẽ sử dụng</li>
+</ul>
+<p>=&gt; chúng ta cần tìm các hyper parameter để tìm ra bộ setup tốt nhất cho mô hình machine learning<br>GridSearchCV tìm kiếm hyper parameter tối ưu qua bộ param_grid truyền vào bằng cách chạy từng trường hợp của bộ<br>param và lựa chọn params cho score tốt nhất</p>
+<p><strong>Thực hiện GridSearchCV cho từng thuật toán và so sánh kết quả theo AUC</strong></p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-                    .dataframe thead th &#123;
-                    text-align: right;
-                    &#125;
-                    </code></pre><p>
-                  </style>
-                  </p>
-                  <table border="1" class="dataframe">
-                    <thead>
-                      <tr style="text-align: right;">
-                        <th></th>
-                        <th>classifier</th>
-                        <th>auc</th>
-                        <th>best_params</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>0</th>
-                        <td>KNN</td>
-                        <td>0.697754</td>
-                        <td>{'n_neighbors': 20}</td>
-                      </tr>
-                      <tr>
-                        <th>1</th>
-                        <td>SVM</td>
-                        <td>0.744170</td>
-                        <td>{'C': 0.1, 'gamma': 0.01, 'kernel': 'rbf'}</td>
-                      </tr>
-                      <tr>
-                        <th>2</th>
-                        <td>RF</td>
-                        <td>0.773504</td>
-                        <td>{'criterion': 'entropy', 'max_depth': 12, 'max...</td>
-                      </tr>
-                      <tr>
-                        <th>3</th>
-                        <td>MLP</td>
-                        <td>0.653790</td>
-                        <td>{'alpha': 0.01, 'hidden_layer_sizes': 17, 'max...</td>
-                      </tr>
-                      <tr>
-                        <th>4</th>
-                        <td>Ada</td>
-                        <td>0.724699</td>
-                        <td>{'algorithm': 'SAMME', 'base_estimator__max_de...</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
 
-                <img src="/img/credit_scorecard_01.png" />
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>classifier</th>
+      <th>auc</th>
+      <th>best_params</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>KNN</td>
+      <td>0.697754</td>
+      <td>{'n_neighbors': 20}</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SVM</td>
+      <td>0.744170</td>
+      <td>{'C': 0.1, 'gamma': 0.01, 'kernel': 'rbf'}</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>RF</td>
+      <td>0.773504</td>
+      <td>{'criterion': 'entropy', 'max_depth': 12, 'max...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>MLP</td>
+      <td>0.653790</td>
+      <td>{'alpha': 0.01, 'hidden_layer_sizes': 17, 'max...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Ada</td>
+      <td>0.724699</td>
+      <td>{'algorithm': 'SAMME', 'base_estimator__max_de...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-                <p><strong>Model RF: RandomForestClassifier() cho kết quả AUC cao nhất : 0.77</strong></p>
-                <p>do vậy ta dùng bộ best params của mô hình của RF để train mô hình dự báo chính của chúng ta.</p>
-                <pre><code>RandomForestClassifier(bootstrap=True, class_weight=None, criterion=&#39;entropy&#39;,
+<img src="/img/credit_scorecard_01.png" />
+
+<p><strong>Model RF: RandomForestClassifier() cho kết quả AUC cao nhất : 0.77</strong></p>
+<p>do vậy ta dùng bộ best params của mô hình của RF để train mô hình dự báo chính của chúng ta.</p>
+<pre><code>RandomForestClassifier(bootstrap=True, class_weight=None, criterion=&#39;entropy&#39;,
                        max_depth=12, max_features=&#39;log2&#39;, max_leaf_nodes=None,
                        min_impurity_decrease=0.0, min_impurity_split=None,
                        min_samples_leaf=1, min_samples_split=2,
@@ -447,135 +373,108 @@
                        n_jobs=None, oob_score=False, random_state=None,
                        verbose=0, warm_start=False)
 </code></pre>
-                <p><strong>Thêm các metrix để đánh giá mô hình:</strong></p>
-                <div>
-                  <style scoped>
-                    .dataframe tbody tr th:only-of-type {
-                      vertical-align: middle;
-                    }
+<p><strong>Thêm các metrix để đánh giá mô hình:</strong></p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-                    <pre><code>.dataframe tbody tr th &#123;
-                    vertical-align: top;
-                    &#125;
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
 
-                    .dataframe thead th &#123;
-                    text-align: right;
-                    &#125;
-                    </code></pre><p>
-                  </style>
-                  </p>
-                  <table border="1" class="dataframe">
-                    <thead>
-                      <tr style="text-align: right;">
-                        <th>metrix</th>
-                        <th>accuracy</th>
-                        <th>f1</th>
-                        <th>recall</th>
-                        <th>precision</th>
-                        <th>auc</th>
-                        <th>gini</th>
-                        <th>ks</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>score</th>
-                        <td>0.821667</td>
-                        <td>0.387171</td>
-                        <td>0.26868</td>
-                        <td>0.692623</td>
-                        <td>0.769251</td>
-                        <td>0.538503</td>
-                        <td>0.417165</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-
-                <p>Do chúng ta đang cố gắp phân loại khách hàng vào 2 nhóm, do vậy chỉ số <strong>AUC</strong> và
-                  <strong>KS</strong> sẽ được ưu tiên dùng trong việc đánh giá mô hình
-                </p>
-                <img src="/img/credit_scorecard_02.png" />
-
-                <p><strong>Với mô hình RandomForestClassifier, chúng ta có thể lấy được độ quan trọng của từng biến tới
-                    mô hình:</strong></p>
-                <img src="/img/credit_scorecard_03.png" />
-
-                <p>Vậy là tới đây chúng ta đã biết cách để tìm ra mô hình machine learning tối ưu để giải quyết vấn đề
-                  của mình, bài cũng khá dài nên chapter này sẽ tạm dừng tại đây.</p>
-                <p>Kỳ tới chúng ta sẽ đi sâu hơn vào các ứng dụng của machine learning cũng như cách khai thác chúng !
-                </p>
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>metrix</th>
+      <th>accuracy</th>
+      <th>f1</th>
+      <th>recall</th>
+      <th>precision</th>
+      <th>auc</th>
+      <th>gini</th>
+      <th>ks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>score</th>
+      <td>0.821667</td>
+      <td>0.387171</td>
+      <td>0.26868</td>
+      <td>0.692623</td>
+      <td>0.769251</td>
+      <td>0.538503</td>
+      <td>0.417165</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 
-              </div>
-              <footer class="entry-meta entry-footer">
+<p>Do chúng ta đang cố gắp phân loại khách hàng vào 2 nhóm, do vậy chỉ số <strong>AUC</strong> và <strong>KS</strong> sẽ được ưu tiên dùng trong việc đánh giá mô hình</p>
+<img src="/img/credit_scorecard_02.png" />
 
+<p><strong>Với mô hình RandomForestClassifier, chúng ta có thể lấy được độ quan trọng của từng biến tới mô hình:</strong></p>
+<img src="/img/credit_scorecard_03.png" />
 
-                <span class="ico-tags"></span>
-                <ul class="article-tag-list" itemprop="keywords">
-                  <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Credit-Scorecard/"
-                      rel="tag">Credit-Scorecard</a></li>
-                  <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Science/"
-                      rel="tag">Data-Science</a></li>
-                </ul>
+<p>Vậy là tới đây chúng ta đã biết cách để tìm ra mô hình machine learning tối ưu để giải quyết vấn đề của mình, bài cũng khá dài nên chapter này sẽ tạm dừng tại đây.</p>
+<p>Kỳ tới chúng ta sẽ đi sâu hơn vào các ứng dụng của machine learning cũng như cách khai thác chúng !</p>
 
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Credit-Scorecard/" rel="tag">Credit-Scorecard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Science/" rel="tag">Data-Science</a></li></ul>
 
-              </footer>
-              <hr class="entry-footer-hr">
-            </div>
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/02/Credit%20score%20chapter%203%20/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Credit Scorecard chapter 3 - Evaluation and Deployment
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/04/Credit%20score%20chapter%201%20/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Credit Scorecard chapter 1 - Logistic Regression and WOE-IV</div>
+    </a>
+  
+</nav>
 
+  
+</article>
 
-            <nav id="article-nav">
+<!-- Table of Contents -->
 
-              <a href="/2020/02/02/Credit%20score%20chapter%203%20/" id="article-nav-newer"
-                class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Newer</strong>
-                <div class="article-nav-title">
-
-                  Credit Scorecard chapter 3 - Evaluation and Deployment
-
-                </div>
-              </a>
-
-
-              <a href="/2020/01/04/Credit%20score%20chapter%201%20/" id="article-nav-older"
-                class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Older</strong>
-                <div class="article-nav-title">Credit Scorecard chapter 1 - Logistic Regression and WOE-IV</div>
-              </a>
-
-            </nav>
-
-
-          </article>
-
-          <!-- Table of Contents -->
-
-          <aside id="sidebar">
-            <div id="toc" class="toc-article">
-              <strong class="toc-title">Contents</strong>
-
-              <ol class="nav">
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#Buoc-1-Data-preprocessing"><span
-                      class="nav-number">1.</span> <span class="nav-text">Bước 1: Data preprocessing</span></a>
-                  <ol class="nav-child">
-                    <li class="nav-item nav-level-3"><a class="nav-link" href="#OneHotEncoder"><span
-                          class="nav-number">1.1.</span> <span class="nav-text">OneHotEncoder</span></a></li>
-                    <li class="nav-item nav-level-3"><a class="nav-link" href="#MinMaxScaler"><span
-                          class="nav-number">1.2.</span> <span class="nav-text">MinMaxScaler</span></a></li>
-                  </ol>
-                </li>
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#Buoc-2-MODEL"><span
-                      class="nav-number">2.</span> <span class="nav-text">Bước 2 : MODEL</span></a></li>
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#Define-models-and-gridsearchs"><span
-                      class="nav-number">3.</span> <span class="nav-text">Define models and gridsearchs</span></a></li>
-              </ol>
-
-            </div>
-          </aside>
-        </section>
-
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Buoc-1-Data-preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Bước 1: Data preprocessing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OneHotEncoder"><span class="nav-number">1.1.</span> <span class="nav-text">OneHotEncoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MinMaxScaler"><span class="nav-number">1.2.</span> <span class="nav-text">MinMaxScaler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Buoc-2-MODEL"><span class="nav-number">2.</span> <span class="nav-text">Bước 2 : MODEL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Define-models-and-gridsearchs"><span class="nav-number">3.</span> <span class="nav-text">Define models and gridsearchs</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
       </div>
 
     </div>
@@ -591,42 +490,42 @@
   
 </nav> -->
     <footer id="footer" class="site-footer">
+  
 
-
-      <div class="clearfix container">
-        <div class="site-info">
-          &copy; 2021 Minh&#39;s Blog All Rights Reserved.
-
-        </div>
-        <div class="site-credit">
-          Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
-        </div>
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2021 Minh&#39;s Blog All Rights Reserved.
+        
       </div>
-    </footer>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
 
 
-    <!-- min height -->
+<!-- min height -->
 
-    <script>
-      var wrapdiv = document.getElementById("wrap");
-      var contentdiv = document.getElementById("content");
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
 
-      wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-
-
-    < !--headerblur min height-- >
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
 
 
-    </script>
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
 
-    <div style="display: none;">
-      <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
-    </div>
+<!-- mathjax config similar to math.stackexchange -->
 
-    <!-- mathjax config similar to math.stackexchange -->
-
-    <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -635,7 +534,7 @@
   });
 </script>
 
-    <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       tex2jax: {
         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
@@ -643,7 +542,7 @@
     });
 </script>
 
-    <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
     MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for(i=0; i < all.length; i += 1) {
@@ -652,26 +551,26 @@
     });
 </script>
 
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+<script src="/js/script.js"></script>
 
 
-    <script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/js/bootstrap.js"></script>
 
 
-
-
-    <script src="/js/script.js"></script>
-
-
-    <script src="/js/bootstrap.js"></script>
-
-
-    <script src="/js/main.js"></script>
+<script src="/js/main.js"></script>
 
 
 
@@ -691,5 +590,4 @@
   <a id="rocket" href="#top" class=""></a>
   <script type="text/javascript" src="/js/totop.js" async=""></script>
 </body>
-
 </html>

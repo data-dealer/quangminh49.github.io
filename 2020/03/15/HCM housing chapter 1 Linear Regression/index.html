@@ -1,320 +1,270 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
-
+  
   <title>HCM housing chapter 1 - Price prediction | Minh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+  
   <meta name="keywords" content="Data-ScienceHCM-housing" />
-
-
-
-
-  <meta name="description"
-    content="Bài này mình sẽ nói thêm 1 chút về cách xử lý dữ liệu cũng như xây dựng mô hình dự đoán giá nhà cơ bản và rất đơn giản. Ứng dụng:    - Sử dụng mô hình để thẩm định một sảm phẩm BDS mới, sản phẩm đang">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="HCM housing chapter 1 - Price prediction">
-  <meta property="og:url"
-    content="https://quangminh49.github.io/2020/03/15/HCM%20housing%20chapter%201%20Linear%20Regression/index.html">
-  <meta property="og:site_name" content="Minh&#39;s Blog">
-  <meta property="og:description"
-    content="Bài này mình sẽ nói thêm 1 chút về cách xử lý dữ liệu cũng như xây dựng mô hình dự đoán giá nhà cơ bản và rất đơn giản. Ứng dụng:    - Sử dụng mô hình để thẩm định một sảm phẩm BDS mới, sản phẩm đang">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:image" content="https://quangminh49.github.io/img/hcm_housing_chapter1_thumb.png">
-  <meta property="article:published_time" content="2020-03-14T17:00:00.000Z">
-  <meta property="article:modified_time" content="2021-04-27T14:02:25.615Z">
-  <meta property="article:author" content="Minh Nguyen">
-  <meta property="article:tag" content="Data-Science">
-  <meta property="article:tag" content="HCM-housing">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:image" content="https://quangminh49.github.io/img/hcm_housing_chapter1_thumb.png">
-
-  <link rel="alternate" href="/atom.xml" title="Minh&#39;s Blog" type="application/atom+xml">
-
+  
+  
+  
+  
+  <meta name="description" content="Bài này mình sẽ nói thêm 1 chút về cách xử lý dữ liệu cũng như xây dựng mô hình dự đoán giá nhà cơ bản và rất đơn giản. Ứng dụng:    - Sử dụng mô hình để thẩm định một sảm phẩm BDS mới, sản phẩm đang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HCM housing chapter 1 - Price prediction">
+<meta property="og:url" content="https://quangminh49.github.io/2020/03/15/HCM%20housing%20chapter%201%20Linear%20Regression/index.html">
+<meta property="og:site_name" content="Minh&#39;s Blog">
+<meta property="og:description" content="Bài này mình sẽ nói thêm 1 chút về cách xử lý dữ liệu cũng như xây dựng mô hình dự đoán giá nhà cơ bản và rất đơn giản. Ứng dụng:    - Sử dụng mô hình để thẩm định một sảm phẩm BDS mới, sản phẩm đang">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://quangminh49.github.io/img/hcm_housing_chapter1_thumb.png">
+<meta property="article:published_time" content="2020-03-14T17:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-27T14:02:25.615Z">
+<meta property="article:author" content="Minh Nguyen">
+<meta property="article:tag" content="Data-Science">
+<meta property="article:tag" content="HCM-housing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://quangminh49.github.io/img/hcm_housing_chapter1_thumb.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Minh&#39;s Blog" type="application/atom+xml">
+  
   <link rel="icon" href="/css/images/favicon.ico">
-
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet"
-    type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
   <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");
-      font-weight: 500;
-      font-style: normal;
-    }
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
 
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");
-      font-weight: 500;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");
-      font-weight: lighter;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");
-      font-weight: 400;
-      font-style: italic;
-    }
-  </style>
-
-  <link rel="stylesheet" id="athemes-headings-fonts-css"
-    href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css"
-    media="all">
-
-  <link rel="stylesheet" id="athemes-headings-fonts-css"
-    href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
 
 
-
-  <script src="/js/jquery-3.1.1.min.js"></script>
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
 
 
   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.css">
-  <link rel="stylesheet" href="/css/fashion.css">
-  <link rel="stylesheet" href="/css/glyphs.css">
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
 
-  <meta name="generator" content="Hexo 5.4.0">
-</head>
-
-
-
-<body data-spy="scroll" data-target="#toc" data-offset="50">
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
-  <header id="allheader" class="site-header" role="banner">
-    <div class="clearfix container">
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
       <div class="site-branding">
 
-        <h1 class="site-title">
+          <h1 class="site-title">
+            
+              <a href="/" title="Minh&#39;s Blog" rel="home"> Minh&#39;s Blog </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
 
-          <a href="/" title="Minh&#39;s Blog" rel="home"> Minh&#39;s Blog </a>
-
-        </h1>
-
-
-
-        <nav id="main-navigation" class="main-navigation" role="navigation">
-          <a class="nav-open">Menu</a>
-          <a class="nav-close">Close</a>
-
-          <div class="clearfix sf-menu">
-            <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="/"> <a class="" href="/">Home</a> </li>
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="archives"> <a class="" href="/archives">Archives</a> </li>
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="/tags/Data-Science"> <a class="" href="/tags/Data-Science">data science</a> </li>
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="about"> <a class="" href="/about">About</a> </li>
-
-            </ul>
-          </div>
-        </nav>
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="/"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="archives"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="/tags/Data-Science"> <a class="" href="/tags/Data-Science">data science</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="about"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
 
       </div>
-    </div>
-  </header>
+  </div>
+</header>
 
 
   <div id="container">
     <div id="wrap">
-
+            
       <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-HCM housing chapter 1 Linear Regression" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/img/hcm_housing_chapter1_thumb.png" rel="gallery_cko03wuur000etbph6j5c00mp">
+        <img src="/img/hcm_housing_chapter1_thumb.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
 
-        <section id="main" style="float:none;">
-          <article id="post-HCM housing chapter 1 Linear Regression" style="width: 66%; float:left;"
-            class="article article-type-post" itemscope itemprop="blogPost">
-            <div id="articleInner"
-              class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      HCM housing chapter 1 - Price prediction
+    </h1>
+  
 
-              <div class="article-gallery">
-                <div class="article-gallery-photos">
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/03/15/HCM%20housing%20chapter%201%20Linear%20Regression/" class="article-date">
+	  <time datetime="2020-03-14T17:00:00.000Z" itemprop="datePublished">March 15, 2020</time>
+	</a>
 
-                  <a class="article-gallery-img fancybox" href="/img/hcm_housing_chapter1_thumb.png"
-                    rel="gallery_cko03wuur000etbph6j5c00mp">
-                    <img src="/img/hcm_housing_chapter1_thumb.png" itemprop="image">
-                  </a>
-
-                </div>
-              </div>
-
-
-              <header class="article-header">
-
-
-                <h1 class="thumb" class="article-title" itemprop="name">
-                  HCM housing chapter 1 - Price prediction
-                </h1>
-
-
-              </header>
-
-              <div class="article-meta">
-
-                <a href="/2020/03/15/HCM%20housing%20chapter%201%20Linear%20Regression/" class="article-date">
-                  <time datetime="2020-03-14T17:00:00.000Z" itemprop="datePublished">March 15, 2020</time>
-                </a>
-
-
-
-              </div>
-              <div class="article-entry" itemprop="articleBody">
-
-                <p>Bài này mình sẽ nói thêm 1 chút về cách xử lý dữ liệu cũng như xây dựng mô hình dự đoán giá nhà cơ
-                  bản và rất đơn giản.</p>
-                <p>Ứng dụng:<br> - Sử dụng mô hình để thẩm định một sảm phẩm BDS mới, sản phẩm đang có giá cao hay thấp
-                  so với thị trường.<br> Mô hình có tính tham khảo cao với cả nhà đầu tư cá nhân và các tổ chức. </p>
-                <p>Let’ go</p>
-                <span id="more"></span>
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Bài này mình sẽ nói thêm 1 chút về cách xử lý dữ liệu cũng như xây dựng mô hình dự đoán giá nhà cơ bản và rất đơn giản.</p>
+<p>Ứng dụng:<br>    - Sử dụng mô hình để thẩm định một sảm phẩm BDS mới, sản phẩm đang có giá cao hay thấp so với thị trường.<br>    Mô hình có tính tham khảo cao với cả nhà đầu tư cá nhân và các tổ chức. </p>
+<p>Let’ go</p>
+<span id="more"></span>
 
 
-                <h2 id="Step-1-Clean-data"><a href="#Step-1-Clean-data" class="headerlink"
-                    title="Step 1 : Clean data"></a>Step 1 : Clean data</h2>
-                <p><strong>Phần này xử lý dữ liệu khá giống trong kỳ trước:</strong></p>
-                <p>Chúng ta đã làm được các việc sau:</p>
-                <ul>
-                  <li>bỏ 1 số trường không dùng</li>
-                  <li>đổi tên trường</li>
-                  <li>tách giá trị số từ chuỗi</li>
-                </ul>
-                <div>
-                  <style scoped>
-                    .dataframe tbody tr th:only-of-type {
-                      vertical-align: middle;
-                    }
+<h2 id="Step-1-Clean-data"><a href="#Step-1-Clean-data" class="headerlink" title="Step 1 : Clean data"></a>Step 1 : Clean data</h2><p><strong>Phần này xử lý dữ liệu khá giống trong kỳ trước:</strong></p>
+<p>Chúng ta đã làm được các việc sau:</p>
+<ul>
+<li>bỏ 1 số trường không dùng</li>
+<li>đổi tên trường</li>
+<li>tách giá trị số từ chuỗi</li>
+</ul>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+    table {
+      font-size: 12px;
+    }
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-                    table {
-                      font-size: 12px;
-                    }
-
-                    .dataframe tbody tr th {
-                      vertical-align: top;
-                    }
-
-                    <pre><code>.dataframe thead th &#123;
-                    text-align: right;
-                    &#125;
-                    </code></pre><p>
-                  </style>
-                  </p>
-                  <table border="1" class="dataframe">
-                    <thead>
-                      <tr style="text-align: right;">
-                        <th></th>
-                        <th>floors</th>
-                        <th>district</th>
-                        <th>street</th>
-                        <th>price</th>
-                        <th>area</th>
-                        <th>facade</th>
-                        <th>road_wide</th>
-                        <th>bedrooms</th>
-                        <th>toilets</th>
-                        <th>furniture</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>0</th>
-                        <td>2.0</td>
-                        <td>Thủ Đức</td>
-                        <td>Linh Xuân</td>
-                        <td>3.50</td>
-                        <td>75.0</td>
-                        <td>4.0</td>
-                        <td>6.5</td>
-                        <td>3.0</td>
-                        <td>2.0</td>
-                        <td>Full nội thất cơ bản</td>
-                      </tr>
-                      <tr>
-                        <th>1</th>
-                        <td>2.0</td>
-                        <td>Thủ Đức</td>
-                        <td>Linh Xuân</td>
-                        <td>1.87</td>
-                        <td>40.0</td>
-                        <td>4.0</td>
-                        <td>3.0</td>
-                        <td>2.0</td>
-                        <td>2.0</td>
-                        <td>Không.</td>
-                      </tr>
-                      <tr>
-                        <th>2</th>
-                        <td>2.0</td>
-                        <td>Thủ Đức</td>
-                        <td>Linh Xuân</td>
-                        <td>1.87</td>
-                        <td>40.0</td>
-                        <td>4.0</td>
-                        <td>3.0</td>
-                        <td>2.0</td>
-                        <td>2.0</td>
-                        <td>Cơ bản.</td>
-                      </tr>
-                      <tr>
-                        <th>3</th>
-                        <td>2.0</td>
-                        <td>Thủ Đức</td>
-                        <td>Linh Xuân</td>
-                        <td>1.20</td>
-                        <td>35.0</td>
-                        <td>5.0</td>
-                        <td>4.0</td>
-                        <td>2.0</td>
-                        <td>2.0</td>
-                        <td>NaN</td>
-                      </tr>
-                      <tr>
-                        <th>4</th>
-                        <td>2.0</td>
-                        <td>Thủ Đức</td>
-                        <td>Linh Xuân</td>
-                        <td>4.45</td>
-                        <td>140.0</td>
-                        <td>5.0</td>
-                        <td>4.0</td>
-                        <td>9.0</td>
-                        <td>4.0</td>
-                        <td>NaN</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+<pre><code>.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>floors</th>
+      <th>district</th>
+      <th>street</th>
+      <th>price</th>
+      <th>area</th>
+      <th>facade</th>
+      <th>road_wide</th>
+      <th>bedrooms</th>
+      <th>toilets</th>
+      <th>furniture</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.0</td>
+      <td>Thủ Đức</td>
+      <td>Linh Xuân</td>
+      <td>3.50</td>
+      <td>75.0</td>
+      <td>4.0</td>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>Full nội thất cơ bản</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.0</td>
+      <td>Thủ Đức</td>
+      <td>Linh Xuân</td>
+      <td>1.87</td>
+      <td>40.0</td>
+      <td>4.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>Không.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.0</td>
+      <td>Thủ Đức</td>
+      <td>Linh Xuân</td>
+      <td>1.87</td>
+      <td>40.0</td>
+      <td>4.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>Cơ bản.</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.0</td>
+      <td>Thủ Đức</td>
+      <td>Linh Xuân</td>
+      <td>1.20</td>
+      <td>35.0</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.0</td>
+      <td>Thủ Đức</td>
+      <td>Linh Xuân</td>
+      <td>4.45</td>
+      <td>140.0</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>9.0</td>
+      <td>4.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 
 
-                <h3 id="Xu-ly-them-truong-furniture"><a href="#Xu-ly-them-truong-furniture" class="headerlink"
-                    title="Xử lý thêm trường furniture"></a>Xử lý thêm trường furniture</h3>
-                <p>Nhưng vẫn còn 1 trường là ‘furniture’ chúng ta chưa xử lý, theo ý kiến cá nhân thì giá BDS cũng sẽ
-                  được tác động từ nội thất khá nhiều nên là chúng ta vẫn nên xử lý biến này !</p>
-                <pre><code>values : 833
+<h3 id="Xu-ly-them-truong-furniture"><a href="#Xu-ly-them-truong-furniture" class="headerlink" title="Xử lý thêm trường furniture"></a>Xử lý thêm trường furniture</h3><p>Nhưng vẫn còn 1 trường là ‘furniture’ chúng ta chưa xử lý, theo ý kiến cá nhân thì giá BDS cũng sẽ được tác động từ nội thất khá nhiều nên là chúng ta vẫn nên xử lý biến này !</p>
+<pre><code>values : 833
 
 &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 Int64Index: 4600 entries, 0 to 4901
@@ -332,522 +282,364 @@ Nội thất cao cấp.    48
 Đầy đủ               47
 Name: furniture, dtype: int64
 </code></pre>
-                <p>Tuy nhiên có một vấn đề là dữ liệu kiểu nhập tự do nên khá khó phân tích, có đến 833 giá trị nhập
-                  khác nhau trên 1693 giá trị không null</p>
-                <p>Nhận thấy rằng đa số các nhà có nột thất thì họ mới ghi vào phần ‘furniture’, do vậy chúng ta có thể
-                  tạo 1 trường dữ liệu để thể hiện là nhà có nột thất hay không.</p>
-                <p>Một cách tốt hơn nữa là chúng ta sẽ phân tích cấu trúc chuỗi và phân loại nội thất theo:</p>
-                <ul>
-                  <li>cao cấp</li>
-                  <li>cơ bản</li>
-                  <li>không</li>
-                </ul>
-                <p>Cách này thì mình nghĩ sẽ giữ được nhiều thông tin hơn nên các bạn có cơ hội thì làm thử nhé, mình
-                  làm cơ bản cho nhanh đã</p>
-                <pre><code>0    1
+<p>Tuy nhiên có một vấn đề là dữ liệu kiểu nhập tự do nên khá khó phân tích, có đến 833 giá trị nhập khác nhau trên 1693 giá trị không null</p>
+<p>Nhận thấy rằng đa số các nhà có nột thất thì họ mới ghi vào phần ‘furniture’, do vậy chúng ta có thể tạo 1 trường dữ liệu để thể hiện là nhà có nột thất hay không.</p>
+<p>Một cách tốt hơn nữa là chúng ta sẽ phân tích cấu trúc chuỗi và phân loại nội thất theo:</p>
+<ul>
+<li>cao cấp</li>
+<li>cơ bản</li>
+<li>không</li>
+</ul>
+<p>Cách này thì mình nghĩ sẽ giữ được nhiều thông tin hơn nên các bạn có cơ hội thì làm thử nhé, mình làm cơ bản cho nhanh đã</p>
+<pre><code>0    1
 1    1
 2    1
 3    0
 4    0
 Name: furniture, dtype: int64
 </code></pre>
-                <h3 id="Xu-ly-missing-values"><a href="#Xu-ly-missing-values" class="headerlink"
-                    title="Xử lý missing values"></a>Xử lý missing values</h3>
-                <pre><code>Missing values: 
+<h3 id="Xu-ly-missing-values"><a href="#Xu-ly-missing-values" class="headerlink" title="Xử lý missing values"></a>Xử lý missing values</h3><pre><code>Missing values: 
              %null  #null
 bedrooms  0.478261     22
 floors    3.086957    142
 </code></pre>
-                <p>Với các dữ liệu missing values thì chúng ta có khá nhiều cách xử lý. Nhưng quan trọng nhất vẫn là ta
-                  hiểu được tại sao dữ liệu đó lại missing. Trong trường hợp của chúng ta thì dữ liệu missing do yếu tố
-                  chủ quan của người đăng tin, quên nhập, không nhập dữ liệu vào.</p>
-                <p>Với dữ liệu numeric có một số cách để xử lý dữ liệu missing như thay bằng 1 giá trị số cụ thể như 0,
-                  -99, cũng có thể thay bằng giá trị mode, median , mean của trường dữ liệu, hoặc tạo 1 mô hình để dự
-                  đoán chính giá trị missing đó.</p>
-                <p>Vậy chúng ta hãy cùng thử nghiệm 1 số phương pháp trên để tìm ra phương án tốt nhất.</p>
-                <p>Bộ dữ liệu thay thế giá trị missing = 0:</p>
-                <div>
-                  <style scoped>
-                    .dataframe tbody tr th:only-of-type {
-                      vertical-align: middle;
-                    }
+<p>Với các dữ liệu missing values thì chúng ta có khá nhiều cách xử lý. Nhưng quan trọng nhất vẫn là ta hiểu được tại sao dữ liệu đó lại missing. Trong trường hợp của chúng ta thì dữ liệu missing do yếu tố chủ quan của người đăng tin, quên nhập, không nhập dữ liệu vào.</p>
+<p>Với dữ liệu numeric có một số cách để xử lý dữ liệu missing như thay bằng 1 giá trị số cụ thể như 0, -99, cũng có thể thay bằng giá trị mode, median , mean của trường dữ liệu, hoặc tạo 1 mô hình để dự đoán chính giá trị missing đó.</p>
+<p>Vậy chúng ta hãy cùng thử nghiệm 1 số phương pháp trên để tìm ra phương án tốt nhất.</p>
+<p>Bộ dữ liệu thay thế giá trị missing = 0:</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+    table {
+      font-size: 12px;
+    }
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-                    table {
-                      font-size: 12px;
-                    }
-
-                    .dataframe tbody tr th {
-                      vertical-align: top;
-                    }
-
-                    <pre><code>.dataframe thead th &#123;
-                    text-align: right;
-                    &#125;
-                    </code></pre><p>
-                  </style>
-                  </p>
-                  <table border="1" class="dataframe">
-                    <thead>
-                      <tr style="text-align: right;">
-                        <th></th>
-                        <th>floors</th>
-                        <th>district</th>
-                        <th>street</th>
-                        <th>price</th>
-                        <th>area</th>
-                        <th>facade</th>
-                        <th>road_wide</th>
-                        <th>bedrooms</th>
-                        <th>toilets</th>
-                        <th>furniture</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>0</th>
-                        <td>2.0</td>
-                        <td>Thủ Đức</td>
-                        <td>Linh Xuân</td>
-                        <td>3.50</td>
-                        <td>75.0</td>
-                        <td>4.0</td>
-                        <td>6.5</td>
-                        <td>3.0</td>
-                        <td>2.0</td>
-                        <td>1</td>
-                      </tr>
-                      <tr>
-                        <th>1</th>
-                        <td>2.0</td>
-                        <td>Thủ Đức</td>
-                        <td>Linh Xuân</td>
-                        <td>1.87</td>
-                        <td>40.0</td>
-                        <td>4.0</td>
-                        <td>3.0</td>
-                        <td>2.0</td>
-                        <td>2.0</td>
-                        <td>1</td>
-                      </tr>
-                      <tr>
-                        <th>2</th>
-                        <td>2.0</td>
-                        <td>Thủ Đức</td>
-                        <td>Linh Xuân</td>
-                        <td>1.87</td>
-                        <td>40.0</td>
-                        <td>4.0</td>
-                        <td>3.0</td>
-                        <td>2.0</td>
-                        <td>2.0</td>
-                        <td>1</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-
-
-                <p>Bộ dữ liệu thay thế giá trị missing = median:</p>
-                <div>
-                  <style scoped>
-                    .dataframe tbody tr th:only-of-type {
-                      vertical-align: middle;
-                    }
-
-                    table {
-                      font-size: 12px;
-                    }
-
-                    .dataframe tbody tr th {
-                      vertical-align: top;
-                    }
-
-                    <pre><code>.dataframe thead th &#123;
-                    text-align: right;
-                    &#125;
-                    </code></pre><p>
-                  </style>
-                  </p>
-                  <table border="1" class="dataframe">
-                    <thead>
-                      <tr style="text-align: right;">
-                        <th></th>
-                        <th>floors</th>
-                        <th>district</th>
-                        <th>street</th>
-                        <th>price</th>
-                        <th>area</th>
-                        <th>facade</th>
-                        <th>road_wide</th>
-                        <th>bedrooms</th>
-                        <th>toilets</th>
-                        <th>furniture</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>0</th>
-                        <td>2.0</td>
-                        <td>Thủ Đức</td>
-                        <td>Linh Xuân</td>
-                        <td>3.50</td>
-                        <td>75.0</td>
-                        <td>4.0</td>
-                        <td>6.5</td>
-                        <td>3.0</td>
-                        <td>2.0</td>
-                        <td>1</td>
-                      </tr>
-                      <tr>
-                        <th>1</th>
-                        <td>2.0</td>
-                        <td>Thủ Đức</td>
-                        <td>Linh Xuân</td>
-                        <td>1.87</td>
-                        <td>40.0</td>
-                        <td>4.0</td>
-                        <td>3.0</td>
-                        <td>2.0</td>
-                        <td>2.0</td>
-                        <td>1</td>
-                      </tr>
-                      <tr>
-                        <th>2</th>
-                        <td>2.0</td>
-                        <td>Thủ Đức</td>
-                        <td>Linh Xuân</td>
-                        <td>1.87</td>
-                        <td>40.0</td>
-                        <td>4.0</td>
-                        <td>3.0</td>
-                        <td>2.0</td>
-                        <td>2.0</td>
-                        <td>1</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-
-
-
-
-                <h2 id="Step-2-Visualization"><a href="#Step-2-Visualization" class="headerlink"
-                    title="Step 2 : Visualization"></a>Step 2 : Visualization</h2>
-                <p>Xem phân phối của các biến:</p>
-                <img src="/img/chapter_1_house_prices_predict_1.png" />
-
-
-                <p><strong>correlation matrix</strong> cho ta thấy sự tương quan giữa các biến, </p>
-                <ul>
-                  <li>giá trị cao (max = 1) cho sự đồng biến </li>
-                  <li>giá trị thấp (min =-1) cho nghịch biến </li>
-                  <li>và bàng quan khi = 0.</li>
-                </ul>
-                <img src="/img/chapter_1_house_prices_predict_2.png" />
-
-                <pre><code>array([&#39;price&#39;, &#39;area&#39;, &#39;road_wide&#39;, &#39;bedrooms&#39;, &#39;toilets&#39;], dtype=object)
+<pre><code>.dataframe thead th &#123;
+    text-align: right;
+&#125;
 </code></pre>
-                <p>Top các thuộc tính có tương quan cao với biến price:</p>
-                <img src="/img/chapter_1_house_prices_predict_3.png" />
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>floors</th>
+      <th>district</th>
+      <th>street</th>
+      <th>price</th>
+      <th>area</th>
+      <th>facade</th>
+      <th>road_wide</th>
+      <th>bedrooms</th>
+      <th>toilets</th>
+      <th>furniture</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.0</td>
+      <td>Thủ Đức</td>
+      <td>Linh Xuân</td>
+      <td>3.50</td>
+      <td>75.0</td>
+      <td>4.0</td>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.0</td>
+      <td>Thủ Đức</td>
+      <td>Linh Xuân</td>
+      <td>1.87</td>
+      <td>40.0</td>
+      <td>4.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.0</td>
+      <td>Thủ Đức</td>
+      <td>Linh Xuân</td>
+      <td>1.87</td>
+      <td>40.0</td>
+      <td>4.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-                <p>Xem qua quan hệ tuyến tính giữa các biến độc lập và biến phụ thuộc:</p>
-                <img src="/img/chapter_1_house_prices_predict_4.png" />
 
-                <h3 id="Hoi-quy-tuyen-tinh-voi-phuong-phap-OLS"><a href="#Hoi-quy-tuyen-tinh-voi-phuong-phap-OLS"
-                    class="headerlink" title="Hồi quy tuyến tính với phương pháp OLS"></a>Hồi quy tuyến tính với phương
-                  pháp OLS</h3>
-                <table class="simpletable">
-                  <caption>OLS Regression Results</caption>
-                  <tr>
-                    <th>Dep. Variable:</th>
-                    <td>price</td>
-                    <th> R-squared: </th>
-                    <td> 0.565</td>
-                  </tr>
-                  <tr>
-                    <th>Model:</th>
-                    <td>OLS</td>
-                    <th> Adj. R-squared: </th>
-                    <td> 0.558</td>
-                  </tr>
-                  <tr>
-                    <th>Method:</th>
-                    <td>Least Squares</td>
-                    <th> F-statistic: </th>
-                    <td> 88.16</td>
-                  </tr>
-                  <tr>
-                    <th>Date:</th>
-                    <td>Sun, 05 Apr 2020</td>
-                    <th> Prob (F-statistic):</th>
-                    <td>7.54e-82</td>
-                  </tr>
-                  <tr>
-                    <th>Time:</th>
-                    <td>16:03:41</td>
-                    <th> Log-Likelihood: </th>
-                    <td> -795.61</td>
-                  </tr>
-                  <tr>
-                    <th>No. Observations:</th>
-                    <td> 484</td>
-                    <th> AIC: </th>
-                    <td> 1607.</td>
-                  </tr>
-                  <tr>
-                    <th>Df Residuals:</th>
-                    <td> 476</td>
-                    <th> BIC: </th>
-                    <td> 1641.</td>
-                  </tr>
-                  <tr>
-                    <th>Df Model:</th>
-                    <td> 7</td>
-                    <th> </th>
-                    <td> </td>
-                  </tr>
-                  <tr>
-                    <th>Covariance Type:</th>
-                    <td>nonrobust</td>
-                    <th> </th>
-                    <td> </td>
-                  </tr>
-                </table>
 
-                <table class="simpletable">
-                  <tr>
-                    <td></td>
-                    <th>coef</th>
-                    <th>std err</th>
-                    <th>t</th>
-                    <th>P>|t|</th>
-                    <th>[0.025</th>
-                    <th>0.975]</th>
-                  </tr>
-                  <tr>
-                    <th>const</th>
-                    <td> -0.9891</td>
-                    <td> 0.338</td>
-                    <td> -2.924</td>
-                    <td> 0.004</td>
-                    <td> -1.654</td>
-                    <td> -0.324</td>
-                  </tr>
-                  <tr>
-                    <th>floors</th>
-                    <td> 0.3321</td>
-                    <td> 0.095</td>
-                    <td> 3.501</td>
-                    <td> 0.001</td>
-                    <td> 0.146</td>
-                    <td> 0.518</td>
-                  </tr>
-                  <tr>
-                    <th>area</th>
-                    <td> 0.0257</td>
-                    <td> 0.002</td>
-                    <td> 10.916</td>
-                    <td> 0.000</td>
-                    <td> 0.021</td>
-                    <td> 0.030</td>
-                  </tr>
-                  <tr>
-                    <th>facade</th>
-                    <td> 0.1948</td>
-                    <td> 0.052</td>
-                    <td> 3.777</td>
-                    <td> 0.000</td>
-                    <td> 0.093</td>
-                    <td> 0.296</td>
-                  </tr>
-                  <tr>
-                    <th>road_wide</th>
-                    <td> 0.1615</td>
-                    <td> 0.022</td>
-                    <td> 7.280</td>
-                    <td> 0.000</td>
-                    <td> 0.118</td>
-                    <td> 0.205</td>
-                  </tr>
-                  <tr>
-                    <th>bedrooms</th>
-                    <td> -0.0531</td>
-                    <td> 0.088</td>
-                    <td> -0.607</td>
-                    <td> 0.544</td>
-                    <td> -0.225</td>
-                    <td> 0.119</td>
-                  </tr>
-                  <tr>
-                    <th>toilets</th>
-                    <td> 0.4166</td>
-                    <td> 0.077</td>
-                    <td> 5.427</td>
-                    <td> 0.000</td>
-                    <td> 0.266</td>
-                    <td> 0.567</td>
-                  </tr>
-                  <tr>
-                    <th>furniture</th>
-                    <td> 0.1319</td>
-                    <td> 0.120</td>
-                    <td> 1.098</td>
-                    <td> 0.273</td>
-                    <td> -0.104</td>
-                    <td> 0.368</td>
-                  </tr>
-                </table>
+<p>Bộ dữ liệu thay thế giá trị missing = median:</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+    table {
+      font-size: 12px;
+    }
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-                <table class="simpletable">
-                  <tr>
-                    <th>Omnibus:</th>
-                    <td>10.497</td>
-                    <th> Durbin-Watson: </th>
-                    <td> 2.166</td>
-                  </tr>
-                  <tr>
-                    <th>Prob(Omnibus):</th>
-                    <td> 0.005</td>
-                    <th> Jarque-Bera (JB): </th>
-                    <td> 18.606</td>
-                  </tr>
-                  <tr>
-                    <th>Skew:</th>
-                    <td> 0.022</td>
-                    <th> Prob(JB): </th>
-                    <td>9.11e-05</td>
-                  </tr>
-                  <tr>
-                    <th>Kurtosis:</th>
-                    <td> 3.960</td>
-                    <th> Cond. No. </th>
-                    <td> 458.</td>
-                  </tr>
-                </table>
+<pre><code>.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>floors</th>
+      <th>district</th>
+      <th>street</th>
+      <th>price</th>
+      <th>area</th>
+      <th>facade</th>
+      <th>road_wide</th>
+      <th>bedrooms</th>
+      <th>toilets</th>
+      <th>furniture</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.0</td>
+      <td>Thủ Đức</td>
+      <td>Linh Xuân</td>
+      <td>3.50</td>
+      <td>75.0</td>
+      <td>4.0</td>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.0</td>
+      <td>Thủ Đức</td>
+      <td>Linh Xuân</td>
+      <td>1.87</td>
+      <td>40.0</td>
+      <td>4.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.0</td>
+      <td>Thủ Đức</td>
+      <td>Linh Xuân</td>
+      <td>1.87</td>
+      <td>40.0</td>
+      <td>4.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-                <img src="/img/chapter_1_house_prices_predict_5.png" />
 
-                <h3 id="Giai-thich-1-so-thuat-ngu-thong-ke"><a href="#Giai-thich-1-so-thuat-ngu-thong-ke"
-                    class="headerlink" title="Giải thích 1 số thuật ngữ thống kê:"></a>Giải thích 1 số thuật ngữ thống
-                  kê:</h3>
-                <ol>
-                  <li>
-                    <p><strong>R-squared</strong>: Độ giải thích biến phụ thuộc bởi các biến độc lâp</p>
-                    <p>R-squared = 0.565, 56.5% biến thiên của biến phụ thuộc(price) được giải thích bởi các biến độc
-                      lập, 43.5% còn lại nằm ngoài mô hình.</p>
-                  </li>
-                </ol>
-                <ol start="2">
-                  <li>
-                    <p><strong>Đa cộng tuyến</strong>: Xảy ra khi các biến độc lập có mối quan hệ tuyến tính cao (hệ số
-                      tương quan gần tới 1), biến không ảnh hưởng tới biến phụ thuộc.</p>
-                    <p> Có thể dùng P_value để tìm các biến bị đa cộng tuyến nếu P_value lớn hơn mức ý nghĩa thì biến đa
-                      cộng tuyến.<br> Ở trường hợp của chúng ta biến bedrooms có P_value = 0.544, rất cao và có hiện
-                      tượng đa cộng tuyến</p>
-                  </li>
-                </ol>
-                <ol start="3">
-                  <li><strong>Tự tương quan</strong>: Quan điểm thống kê cổ điển giả định rằng quan hệ tương quan giữa
-                    các thành viên của chuỗi của các quan sát được sắp xếp theo thời gian hoặc không gian trong ngữ cảnh
-                    hồi qui không tồn tại trong các nhiễu ui. Kiểm định Durbin-Watson = 2.166 cho kết quả nằm trong
-                    khoảng (1,3) nhiễu sẽ không có sự tự tương quan. Nghe có vẻ hơi rắc rối nhưng hãy quan sát đồ thị
-                    dưới đây để thấy rõ vấn đề:</li>
-                </ol>
-                <img src="/img/chapter_1_house_prices_predict_6.png" />
 
-                <ol start="4">
-                  <li><strong>RMSE</strong>: Root Mean Square Error</li>
-                </ol>
-                <p> Là chênh lệch giữa giá trị thực và giá trị dự báo nhằm đánh giá chất lượng hay sự phù hợp của mô
-                  hình dự báo.</p>
-                <pre><code>rmse on test: 1.2007801545340961
+
+
+<h2 id="Step-2-Visualization"><a href="#Step-2-Visualization" class="headerlink" title="Step 2 : Visualization"></a>Step 2 : Visualization</h2><p>Xem phân phối của các biến:</p>
+<img src="/img/chapter_1_house_prices_predict_1.png" />
+
+
+<p><strong>correlation matrix</strong> cho ta thấy sự tương quan giữa các biến, </p>
+<ul>
+<li>giá trị cao (max = 1) cho sự đồng biến </li>
+<li>giá trị thấp (min =-1) cho nghịch biến </li>
+<li>và bàng quan khi = 0.</li>
+</ul>
+<img src="/img/chapter_1_house_prices_predict_2.png" />
+
+<pre><code>array([&#39;price&#39;, &#39;area&#39;, &#39;road_wide&#39;, &#39;bedrooms&#39;, &#39;toilets&#39;], dtype=object)
+</code></pre>
+<p>Top các thuộc tính có tương quan cao với biến price:</p>
+<img src="/img/chapter_1_house_prices_predict_3.png" />
+
+<p>Xem qua quan hệ tuyến tính giữa các biến độc lập và biến phụ thuộc:</p>
+<img src="/img/chapter_1_house_prices_predict_4.png" />
+
+<h3 id="Hoi-quy-tuyen-tinh-voi-phuong-phap-OLS"><a href="#Hoi-quy-tuyen-tinh-voi-phuong-phap-OLS" class="headerlink" title="Hồi quy tuyến tính với phương pháp OLS"></a>Hồi quy tuyến tính với phương pháp OLS</h3><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>price</td>      <th>  R-squared:         </th> <td>   0.565</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.558</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   88.16</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 05 Apr 2020</td> <th>  Prob (F-statistic):</th> <td>7.54e-82</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>16:03:41</td>     <th>  Log-Likelihood:    </th> <td> -795.61</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   484</td>      <th>  AIC:               </th> <td>   1607.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   476</td>      <th>  BIC:               </th> <td>   1641.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     7</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>     <td>   -0.9891</td> <td>    0.338</td> <td>   -2.924</td> <td> 0.004</td> <td>   -1.654</td> <td>   -0.324</td>
+</tr>
+<tr>
+  <th>floors</th>    <td>    0.3321</td> <td>    0.095</td> <td>    3.501</td> <td> 0.001</td> <td>    0.146</td> <td>    0.518</td>
+</tr>
+<tr>
+  <th>area</th>      <td>    0.0257</td> <td>    0.002</td> <td>   10.916</td> <td> 0.000</td> <td>    0.021</td> <td>    0.030</td>
+</tr>
+<tr>
+  <th>facade</th>    <td>    0.1948</td> <td>    0.052</td> <td>    3.777</td> <td> 0.000</td> <td>    0.093</td> <td>    0.296</td>
+</tr>
+<tr>
+  <th>road_wide</th> <td>    0.1615</td> <td>    0.022</td> <td>    7.280</td> <td> 0.000</td> <td>    0.118</td> <td>    0.205</td>
+</tr>
+<tr>
+  <th>bedrooms</th>  <td>   -0.0531</td> <td>    0.088</td> <td>   -0.607</td> <td> 0.544</td> <td>   -0.225</td> <td>    0.119</td>
+</tr>
+<tr>
+  <th>toilets</th>   <td>    0.4166</td> <td>    0.077</td> <td>    5.427</td> <td> 0.000</td> <td>    0.266</td> <td>    0.567</td>
+</tr>
+<tr>
+  <th>furniture</th> <td>    0.1319</td> <td>    0.120</td> <td>    1.098</td> <td> 0.273</td> <td>   -0.104</td> <td>    0.368</td>
+</tr>
+</table>
+
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>10.497</td> <th>  Durbin-Watson:     </th> <td>   2.166</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.005</td> <th>  Jarque-Bera (JB):  </th> <td>  18.606</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.022</td> <th>  Prob(JB):          </th> <td>9.11e-05</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.960</td> <th>  Cond. No.          </th> <td>    458.</td>
+</tr>
+</table>
+
+<img src="/img/chapter_1_house_prices_predict_5.png" />
+
+<h3 id="Giai-thich-1-so-thuat-ngu-thong-ke"><a href="#Giai-thich-1-so-thuat-ngu-thong-ke" class="headerlink" title="Giải thích 1 số thuật ngữ thống kê:"></a>Giải thích 1 số thuật ngữ thống kê:</h3><ol>
+<li><p><strong>R-squared</strong>: Độ giải thích biến phụ thuộc bởi các biến độc lâp</p>
+<p>R-squared = 0.565, 56.5% biến thiên của biến phụ thuộc(price) được giải thích bởi các biến độc lập, 43.5% còn lại nằm ngoài mô hình.</p>
+</li>
+</ol>
+<ol start="2">
+<li><p><strong>Đa cộng tuyến</strong>:  Xảy ra khi các biến độc lập có mối quan hệ tuyến tính cao (hệ số tương quan gần tới 1), biến không ảnh hưởng tới biến phụ thuộc.</p>
+<p> Có thể dùng P_value để tìm các biến bị đa cộng tuyến nếu P_value lớn hơn mức ý nghĩa thì biến đa cộng tuyến.<br> Ở trường hợp của chúng ta biến bedrooms có P_value = 0.544, rất cao và có hiện tượng đa cộng tuyến</p>
+</li>
+</ol>
+<ol start="3">
+<li><strong>Tự tương quan</strong>: Quan điểm thống kê cổ điển giả định rằng quan hệ tương quan giữa các thành viên của chuỗi của các quan sát được sắp xếp theo thời gian hoặc không gian trong ngữ cảnh hồi qui không tồn tại trong các nhiễu ui. Kiểm định Durbin-Watson = 2.166 cho kết quả nằm trong khoảng (1,3) nhiễu sẽ không có sự tự tương quan. Nghe có vẻ hơi rắc rối nhưng hãy quan sát đồ thị dưới đây để thấy rõ vấn đề:</li>
+</ol>
+<img src="/img/chapter_1_house_prices_predict_6.png" />
+
+<ol start="4">
+<li><strong>RMSE</strong>:  Root Mean Square Error</li>
+</ol>
+<p>  Là chênh lệch giữa giá trị thực và giá trị dự báo nhằm đánh giá chất lượng hay sự phù hợp của mô hình dự báo.</p>
+<pre><code>rmse on test: 1.2007801545340961
 rmse on train: 1.2521709451245022
 </code></pre>
-                <p>Kỳ này chúng ta đã nói về cách xây dựng mô hình hồi quy tuyến tính để dự báo giá nhà. Tuy mô hình còn
-                  khá đơn giản và chúng ta cần phải tinh chỉnh rất nhiều thứ để có một mô hình tốt hơn, điều đó cần thời
-                  gian và sự nghiên cứu nghiêm túc. </p>
-                <p>Theo mình data science là môn khoa học thực nghiệm, do vậy chúng ta phải kiên trì để giống như Edison
-                  - tìm ra chiếc bóng đèn của mình.</p>
-                <p>Mời các bạn đón đọc kỳ sau, chúng ta sẽ nói về timeseries, một chủ đề khá thú vị đó !</p>
+<p>Kỳ này chúng ta đã nói về cách xây dựng mô hình hồi quy tuyến tính để dự báo giá nhà. Tuy mô hình còn khá đơn giản và chúng ta cần phải tinh chỉnh rất nhiều thứ để có một mô hình tốt hơn, điều đó cần thời gian và sự nghiên cứu nghiêm túc. </p>
+<p>Theo mình data science là môn khoa học thực nghiệm, do vậy chúng ta phải kiên trì để giống như Edison - tìm ra chiếc bóng đèn của mình.</p>
+<p>Mời các bạn đón đọc kỳ sau, chúng ta sẽ nói về timeseries, một chủ đề khá thú vị đó !</p>
 
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Science/" rel="tag">Data-Science</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HCM-housing/" rel="tag">HCM-housing</a></li></ul>
 
-              </div>
-              <footer class="entry-meta entry-footer">
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/05/HCM%20housing%20chapter%202/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          HCM housing chapter 2 - Visualization
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/10/HCM%20housing%20chapter%200%20intro%20/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HCM housing chapter 0 - Intro</div>
+    </a>
+  
+</nav>
 
+  
+</article>
 
-                <span class="ico-tags"></span>
-                <ul class="article-tag-list" itemprop="keywords">
-                  <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Science/"
-                      rel="tag">Data-Science</a></li>
-                  <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HCM-housing/"
-                      rel="tag">HCM-housing</a></li>
-                </ul>
+<!-- Table of Contents -->
 
-
-              </footer>
-              <hr class="entry-footer-hr">
-            </div>
-
-
-            <nav id="article-nav">
-
-              <a href="/2020/04/05/HCM%20housing%20chapter%202/" id="article-nav-newer" class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Newer</strong>
-                <div class="article-nav-title">
-
-                  HCM housing chapter 2 - Visualization
-
-                </div>
-              </a>
-
-
-              <a href="/2020/03/10/HCM%20housing%20chapter%200%20intro%20/" id="article-nav-older"
-                class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Older</strong>
-                <div class="article-nav-title">HCM housing chapter 0 - Intro</div>
-              </a>
-
-            </nav>
-
-
-          </article>
-
-          <!-- Table of Contents -->
-
-          <aside id="sidebar">
-            <div id="toc" class="toc-article">
-              <strong class="toc-title">Contents</strong>
-
-              <ol class="nav">
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1-Clean-data"><span
-                      class="nav-number">1.</span> <span class="nav-text">Step 1 : Clean data</span></a>
-                  <ol class="nav-child">
-                    <li class="nav-item nav-level-3"><a class="nav-link" href="#Xu-ly-them-truong-furniture"><span
-                          class="nav-number">1.1.</span> <span class="nav-text">Xử lý thêm trường furniture</span></a>
-                    </li>
-                    <li class="nav-item nav-level-3"><a class="nav-link" href="#Xu-ly-missing-values"><span
-                          class="nav-number">1.2.</span> <span class="nav-text">Xử lý missing values</span></a></li>
-                  </ol>
-                </li>
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-Visualization"><span
-                      class="nav-number">2.</span> <span class="nav-text">Step 2 : Visualization</span></a>
-                  <ol class="nav-child">
-                    <li class="nav-item nav-level-3"><a class="nav-link"
-                        href="#Hoi-quy-tuyen-tinh-voi-phuong-phap-OLS"><span class="nav-number">2.1.</span> <span
-                          class="nav-text">Hồi quy tuyến tính với phương pháp OLS</span></a></li>
-                    <li class="nav-item nav-level-3"><a class="nav-link"
-                        href="#Giai-thich-1-so-thuat-ngu-thong-ke"><span class="nav-number">2.2.</span> <span
-                          class="nav-text">Giải thích 1 số thuật ngữ thống kê:</span></a></li>
-                  </ol>
-                </li>
-              </ol>
-
-            </div>
-          </aside>
-        </section>
-
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1-Clean-data"><span class="nav-number">1.</span> <span class="nav-text">Step 1 : Clean data</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xu-ly-them-truong-furniture"><span class="nav-number">1.1.</span> <span class="nav-text">Xử lý thêm trường furniture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xu-ly-missing-values"><span class="nav-number">1.2.</span> <span class="nav-text">Xử lý missing values</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-Visualization"><span class="nav-number">2.</span> <span class="nav-text">Step 2 : Visualization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hoi-quy-tuyen-tinh-voi-phuong-phap-OLS"><span class="nav-number">2.1.</span> <span class="nav-text">Hồi quy tuyến tính với phương pháp OLS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Giai-thich-1-so-thuat-ngu-thong-ke"><span class="nav-number">2.2.</span> <span class="nav-text">Giải thích 1 số thuật ngữ thống kê:</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
       </div>
 
     </div>
@@ -863,42 +655,42 @@ rmse on train: 1.2521709451245022
   
 </nav> -->
     <footer id="footer" class="site-footer">
+  
 
-
-      <div class="clearfix container">
-        <div class="site-info">
-          &copy; 2021 Minh&#39;s Blog All Rights Reserved.
-
-        </div>
-        <div class="site-credit">
-          Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
-        </div>
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2021 Minh&#39;s Blog All Rights Reserved.
+        
       </div>
-    </footer>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
 
 
-    <!-- min height -->
+<!-- min height -->
 
-    <script>
-      var wrapdiv = document.getElementById("wrap");
-      var contentdiv = document.getElementById("content");
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
 
-      wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-
-
-    < !--headerblur min height-- >
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
 
 
-    </script>
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
 
-    <div style="display: none;">
-      <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
-    </div>
+<!-- mathjax config similar to math.stackexchange -->
 
-    <!-- mathjax config similar to math.stackexchange -->
-
-    <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -907,7 +699,7 @@ rmse on train: 1.2521709451245022
   });
 </script>
 
-    <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       tex2jax: {
         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
@@ -915,7 +707,7 @@ rmse on train: 1.2521709451245022
     });
 </script>
 
-    <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
     MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for(i=0; i < all.length; i += 1) {
@@ -924,26 +716,26 @@ rmse on train: 1.2521709451245022
     });
 </script>
 
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+<script src="/js/script.js"></script>
 
 
-    <script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/js/bootstrap.js"></script>
 
 
-
-
-    <script src="/js/script.js"></script>
-
-
-    <script src="/js/bootstrap.js"></script>
-
-
-    <script src="/js/main.js"></script>
+<script src="/js/main.js"></script>
 
 
 
@@ -963,5 +755,4 @@ rmse on train: 1.2521709451245022
   <a id="rocket" href="#top" class=""></a>
   <script type="text/javascript" src="/js/totop.js" async=""></script>
 </body>
-
 </html>

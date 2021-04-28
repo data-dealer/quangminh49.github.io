@@ -1,355 +1,258 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
-
+  
   <title>Credit Scorecard chapter 1 - Logistic Regression and WOE-IV | Minh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+  
   <meta name="keywords" content="Credit-ScorecardData-Science" />
-
-
-
-
-  <meta name="description"
-    content="Credit Scorecard với mục tiêu là chấm điểm và phân loại khách hàng, cho phép đưa ra quyết định về chính sách can thiệp nhằm tối ưu hóa hiệu quả kinh doanh. Thí dụ minh họa là một dữ liệu về thông tin">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Credit Scorecard chapter 1 - Logistic Regression and WOE-IV">
-  <meta property="og:url" content="https://quangminh49.github.io/2020/01/04/Credit%20score%20chapter%201%20/index.html">
-  <meta property="og:site_name" content="Minh&#39;s Blog">
-  <meta property="og:description"
-    content="Credit Scorecard với mục tiêu là chấm điểm và phân loại khách hàng, cho phép đưa ra quyết định về chính sách can thiệp nhằm tối ưu hóa hiệu quả kinh doanh. Thí dụ minh họa là một dữ liệu về thông tin">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:image" content="https://miro.medium.com/max/1280/0*gKOV65tvGfY8SMem.png">
-  <meta property="article:published_time" content="2020-01-03T17:00:00.000Z">
-  <meta property="article:modified_time" content="2021-04-27T14:01:58.982Z">
-  <meta property="article:author" content="Minh Nguyen">
-  <meta property="article:tag" content="Credit-Scorecard">
-  <meta property="article:tag" content="Data-Science">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:image" content="https://miro.medium.com/max/1280/0*gKOV65tvGfY8SMem.png">
-
-  <link rel="alternate" href="/atom.xml" title="Minh&#39;s Blog" type="application/atom+xml">
-
+  
+  
+  
+  
+  <meta name="description" content="Credit Scorecard với mục tiêu là chấm điểm và phân loại khách hàng, cho phép đưa ra quyết định về chính sách can thiệp nhằm tối ưu hóa hiệu quả kinh doanh. Thí dụ minh họa là một dữ liệu về thông tin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Credit Scorecard chapter 1 - Logistic Regression and WOE-IV">
+<meta property="og:url" content="https://quangminh49.github.io/2020/01/04/Credit%20score%20chapter%201%20/index.html">
+<meta property="og:site_name" content="Minh&#39;s Blog">
+<meta property="og:description" content="Credit Scorecard với mục tiêu là chấm điểm và phân loại khách hàng, cho phép đưa ra quyết định về chính sách can thiệp nhằm tối ưu hóa hiệu quả kinh doanh. Thí dụ minh họa là một dữ liệu về thông tin">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://miro.medium.com/max/1280/0*gKOV65tvGfY8SMem.png">
+<meta property="article:published_time" content="2020-01-03T17:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-27T14:01:58.982Z">
+<meta property="article:author" content="Minh Nguyen">
+<meta property="article:tag" content="Credit-Scorecard">
+<meta property="article:tag" content="Data-Science">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://miro.medium.com/max/1280/0*gKOV65tvGfY8SMem.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Minh&#39;s Blog" type="application/atom+xml">
+  
   <link rel="icon" href="/css/images/favicon.ico">
-
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet"
-    type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
   <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");
-      font-weight: 500;
-      font-style: normal;
-    }
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
 
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");
-      font-weight: 500;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");
-      font-weight: lighter;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: futura-pt;
-      src: url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");
-      font-weight: 400;
-      font-style: italic;
-    }
-  </style>
-
-  <link rel="stylesheet" id="athemes-headings-fonts-css"
-    href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css"
-    media="all">
-
-  <link rel="stylesheet" id="athemes-headings-fonts-css"
-    href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
 
 
-
-  <script src="/js/jquery-3.1.1.min.js"></script>
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
 
 
   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.css">
-  <link rel="stylesheet" href="/css/fashion.css">
-  <link rel="stylesheet" href="/css/glyphs.css">
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
 
-  <meta name="generator" content="Hexo 5.4.0">
-</head>
-
-
-
-<body data-spy="scroll" data-target="#toc" data-offset="50">
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
-  <header id="allheader" class="site-header" role="banner">
-    <div class="clearfix container">
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
       <div class="site-branding">
 
-        <h1 class="site-title">
+          <h1 class="site-title">
+            
+              <a href="/" title="Minh&#39;s Blog" rel="home"> Minh&#39;s Blog </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
 
-          <a href="/" title="Minh&#39;s Blog" rel="home"> Minh&#39;s Blog </a>
-
-        </h1>
-
-
-
-        <nav id="main-navigation" class="main-navigation" role="navigation">
-          <a class="nav-open">Menu</a>
-          <a class="nav-close">Close</a>
-
-          <div class="clearfix sf-menu">
-            <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="/"> <a class="" href="/">Home</a> </li>
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="archives"> <a class="" href="/archives">Archives</a> </li>
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="/tags/Data-Science"> <a class="" href="/tags/Data-Science">data science</a> </li>
-
-              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"
-                linktext="about"> <a class="" href="/about">About</a> </li>
-
-            </ul>
-          </div>
-        </nav>
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="/"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="archives"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="/tags/Data-Science"> <a class="" href="/tags/Data-Science">data science</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="about"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
 
       </div>
-    </div>
-  </header>
+  </div>
+</header>
 
 
   <div id="container">
     <div id="wrap">
-
+            
       <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Credit score chapter 1 " style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" target="_blank" href="https://miro.medium.com/max/1280/0*gKOV65tvGfY8SMem.png" rel="gallery_cko03wuuo0005tbph0k74b1qc noopener">
+        <img src="https://miro.medium.com/max/1280/0*gKOV65tvGfY8SMem.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
 
-        <section id="main" style="float:none;">
-          <article id="post-Credit score chapter 1 " style="width: 66%; float:left;" class="article article-type-post"
-            itemscope itemprop="blogPost">
-            <div id="articleInner"
-              class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Credit Scorecard chapter 1 - Logistic Regression and WOE-IV
+    </h1>
+  
 
-              <div class="article-gallery">
-                <div class="article-gallery-photos">
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/04/Credit%20score%20chapter%201%20/" class="article-date">
+	  <time datetime="2020-01-03T17:00:00.000Z" itemprop="datePublished">January 4, 2020</time>
+	</a>
 
-                  <a class="article-gallery-img fancybox" target="_blank"
-                    href="https://miro.medium.com/max/1280/0*gKOV65tvGfY8SMem.png"
-                    rel="gallery_cko03wuuo0005tbph0k74b1qc noopener">
-                    <img src="https://miro.medium.com/max/1280/0*gKOV65tvGfY8SMem.png" itemprop="image">
-                  </a>
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Credit Scorecard</strong> với mục tiêu là chấm điểm và phân loại khách hàng, cho phép đưa ra quyết định về chính sách can thiệp nhằm tối ưu hóa hiệu quả kinh doanh.</p>
+<p>Thí dụ minh họa là một dữ liệu về thông tin cơ bản cũng như lịch sử hành vi của khách hàng thuộc nhóm trễ hạn nợ 2 tháng (B2_BOM).</p>
+<p>Bài toán được giải quyết dựa trên dữ liệu của 10000 khách hàng, bao gồm nhiều thông tin, các thông tin đã được biến đổi cũng như thay đổi tên trường để đảm bảo lý do bảo mật.</p>
+<span id="more"></span>
 
-                </div>
-              </div>
+<p>Biến output : <strong>label</strong></p>
+<ul>
+<li>label = 1: khách hàng mục tiêu</li>
+<li>label = 0: khách hàng bình thường</li>
+</ul>
+<p>Mục tiêu bài viết : </p>
+<ol>
+<li>Trực quan hóa dữ liệu với seaborn</li>
+<li>Giới thiệu thuật toán Logistic regression với WOE</li>
+</ol>
+<hr>
+<h2 id="Bieu-do-truc-quan-hoa-du-lieu"><a href="#Bieu-do-truc-quan-hoa-du-lieu" class="headerlink" title="Biểu đồ trực quan hóa dữ liệu"></a>Biểu đồ trực quan hóa dữ liệu</h2><p>Cách để chúng ta hiểu dữ liệu nhanh nhất đó chính là qua hình ảnh </p>
+<p>Dưới đây mình chủ yếu sử dụng thư viện <strong>seaborn</strong> vì nó khá thuận tiện mà lại rất đẹp nữa</p>
+<p>Biểu đồ histogram để thấy được tần suất của dữ liệu:</p>
+<img src="/img/creadit_scorecard1_0.png" />
 
+<p>Biến phân loại:</p>
+<img src="/img/creadit_scorecard1_1.png" />
 
-              <header class="article-header">
-
-
-                <h1 class="thumb" class="article-title" itemprop="name">
-                  Credit Scorecard chapter 1 - Logistic Regression and WOE-IV
-                </h1>
-
-
-              </header>
-
-              <div class="article-meta">
-
-                <a href="/2020/01/04/Credit%20score%20chapter%201%20/" class="article-date">
-                  <time datetime="2020-01-03T17:00:00.000Z" itemprop="datePublished">January 4, 2020</time>
-                </a>
-
-
-
-              </div>
-              <div class="article-entry" itemprop="articleBody">
-
-                <p><strong>Credit Scorecard</strong> với mục tiêu là chấm điểm và phân loại khách hàng, cho phép đưa ra
-                  quyết định về chính sách can thiệp nhằm tối ưu hóa hiệu quả kinh doanh.</p>
-                <p>Thí dụ minh họa là một dữ liệu về thông tin cơ bản cũng như lịch sử hành vi của khách hàng thuộc nhóm
-                  trễ hạn nợ 2 tháng (B2_BOM).</p>
-                <p>Bài toán được giải quyết dựa trên dữ liệu của 10000 khách hàng, bao gồm nhiều thông tin, các thông
-                  tin đã được biến đổi cũng như thay đổi tên trường để đảm bảo lý do bảo mật.</p>
-                <span id="more"></span>
-
-                <p>Biến output : <strong>label</strong></p>
-                <ul>
-                  <li>label = 1: khách hàng mục tiêu</li>
-                  <li>label = 0: khách hàng bình thường</li>
-                </ul>
-                <p>Mục tiêu bài viết : </p>
-                <ol>
-                  <li>Trực quan hóa dữ liệu với seaborn</li>
-                  <li>Giới thiệu thuật toán Logistic regression với WOE</li>
-                </ol>
-                <hr>
-                <h2 id="Bieu-do-truc-quan-hoa-du-lieu"><a href="#Bieu-do-truc-quan-hoa-du-lieu" class="headerlink"
-                    title="Biểu đồ trực quan hóa dữ liệu"></a>Biểu đồ trực quan hóa dữ liệu</h2>
-                <p>Cách để chúng ta hiểu dữ liệu nhanh nhất đó chính là qua hình ảnh </p>
-                <p>Dưới đây mình chủ yếu sử dụng thư viện <strong>seaborn</strong> vì nó khá thuận tiện mà lại rất đẹp
-                  nữa</p>
-                <p>Biểu đồ histogram để thấy được tần suất của dữ liệu:</p>
-                <img src="/img/creadit_scorecard1_0.png" />
-
-                <p>Biến phân loại:</p>
-                <img src="/img/creadit_scorecard1_1.png" />
-
-                <p>Biểu đồ pairplot để thấy được mối quan hệ của dữ liệu:</p>
-                <img src="/img/creadit_scorecard1_2.png" />
+<p>Biểu đồ pairplot để thấy được mối quan hệ của dữ liệu:</p>
+<img src="/img/creadit_scorecard1_2.png" />
 
 
-                <p>Quan sát thêm sự mối quan hệ giữa các biến với sns.jointplot:</p>
-                <img src="/img/creadit_scorecard1_3.png" />
+<p>Quan sát thêm sự mối quan hệ giữa các biến với sns.jointplot:</p>
+<img src="/img/creadit_scorecard1_3.png" />
 
-                <p>factor “field35” theo “field14” và “label”:</p>
-                <img src="/img/creadit_scorecard1_4.png" />
+<p>factor “field35” theo “field14” và “label”:</p>
+<img src="/img/creadit_scorecard1_4.png" />
 
-                <h2 id="Gioi-thieu"><a href="#Gioi-thieu" class="headerlink" title="Giới thiệu :"></a>Giới thiệu :</h2>
-                <p>Sau khi nhìn qua dữ liệu chắc chúng ta ai cũng muốn hiểu sâu hơn về dữ liệu cũng như khai thác tri
-                  thức từ chúng. Một phương pháp thống kê phổ biến dễ hiểu và cũng rất hiệu quả cho các bài toán phân
-                  lớp nhị phân thường được nhắc tới đó chính là Logistic regression. </p>
-                <p>Mô hình hồi quy logistic là một trong những kỹ thuật thống kê được sử dụng phổ biến nhất để giải
-                  quyết vấn đề phân loại nhị phân. Nó được chấp nhận trong hầu hết các lĩnh vực. Hai khái niệm này -
-                  Weight of Evidence (WOE) và Information Value (IV) phát triển từ cùng một kỹ thuật hồi quy logistic.
-                  Hai thuật ngữ này đã tồn tại trong thế giới chấm điểm tín dụng trong hơn 4-5 thập kỷ. Chúng đã được sử
-                  dụng làm chuẩn để sàng lọc các biến trong các dự án mô hình rủi ro tín dụng như xác suất vỡ nợ. Chúng
-                  giúp khám phá dữ liệu và các biến. Nó cũng được sử dụng trong dự án phân tích tiếp thị như mô hình
-                  phân khúc khách hàng, v.v.</p>
-                <h2 id="mo-hinh-Logistic-regression"><a href="#mo-hinh-Logistic-regression" class="headerlink"
-                    title="mô hình Logistic regression :"></a>mô hình Logistic regression :</h2>
-                <p>Với cơ chế phân lớp đễ hiểu và các hàm kích hoạt cơ bản (activation) như sigmoid thì chúng ta có thể
-                  khai thác được rất nhiều từ dữ liệu</p>
-                <p>Về chi tiết cụ thể về cơ chế hoạt động của Logistic regression và hàm activation sigmoid thì mời các
-                  bạn các bạn đón đọc trang web rất uy tín dưới đây</p>
-                <p><a target="_blank" rel="noopener"
-                    href="https://machinelearningcoban.com/2017/01/27/logisticregression/">machinelearningcoban.com</a>
-                </p>
-                <h2 id="Weight-of-Evidence-WOE"><a href="#Weight-of-Evidence-WOE" class="headerlink"
-                    title="Weight of Evidence(WOE)"></a>Weight of Evidence(WOE)</h2>
-                <p><strong>WOE = In(% of non-events / % of events)</strong></p>
-                <p>WOE : Trọng số cho biết sức mạnh dự đoán của một biến độc lập liên quan đến biến phụ thuộc. Giúp
-                  chuyển đổi một biến độc lập liên tục thành một tập hợp các nhóm hoặc bin dựa trên sự giống nhau của
-                  phân phối biến phụ thuộc.</p>
-                <h2 id="Information-Value-IV"><a href="#Information-Value-IV" class="headerlink"
-                    title="Information Value(IV):"></a>Information Value(IV):</h2>
-                <p><strong>IV = ∑ (% of non-events - % of events) * WOE</strong></p>
-                <p>IV là một trong những kỹ thuật hữu ích nhất để chọn các biến quan trọng trong mô hình dự đoán. Nó
-                  giúp xếp hạng các biến trên cơ sở tầm quan trọng của chúng.</p>
-                <p>Các bạn có thể tham khảo thêm về WOE và IV qua các bài viết dưới đây </p>
-                <p><a target="_blank" rel="noopener"
-                    href="https://medium.com/@sundarstyles89/weight-of-evidence-and-information-value-using-python-6f05072e83eb">medium.com</a><br><a
-                    target="_blank" rel="noopener"
-                    href="https://www.kaggle.com/pavansanagapati/weight-of-evidence-woe-information-value-iv">kaggle.com</a>
-                </p>
-                <hr>
-                <h2 id="Thuc-hanh-nao"><a href="#Thuc-hanh-nao" class="headerlink" title="Thực hành nào :"></a>Thực hành
-                  nào :</h2>
-                <p>Lý thuyết vậy là nhiều rồi, chắc đọc cũng chán ngấy cả người. Vậy chúng ta cùng thực hành chút cho
-                  nóng người nào. </p>
-                <p>Về phương pháp biến đổi WOE thì có rất nhiều, mình cũng tự custom module để tính woe để theo ý mình
-                  nhưng cũng cần kết hợp với các thư viện có sẵn để đạt kết quả tốt nhât:</p>
-                <p>Dưới đây là kết quả chúng chạy mô hình credit scorecard</p>
-                <img src="/img/creadit_scorecard1_5.png" />
+<h2 id="Gioi-thieu"><a href="#Gioi-thieu" class="headerlink" title="Giới thiệu :"></a>Giới thiệu :</h2><p>Sau khi nhìn qua dữ liệu chắc chúng ta ai cũng muốn hiểu sâu hơn về dữ liệu cũng như khai thác tri thức từ chúng. Một phương pháp thống kê phổ biến dễ hiểu và cũng rất hiệu quả cho các bài toán phân lớp nhị phân thường được nhắc tới đó chính là Logistic regression. </p>
+<p>Mô hình hồi quy logistic là một trong những kỹ thuật thống kê được sử dụng phổ biến nhất để giải quyết vấn đề phân loại nhị phân. Nó được chấp nhận trong hầu hết các lĩnh vực. Hai khái niệm này - Weight of Evidence (WOE) và Information Value (IV) phát triển từ cùng một kỹ thuật hồi quy logistic. Hai thuật ngữ này đã tồn tại trong thế giới chấm điểm tín dụng trong hơn 4-5 thập kỷ. Chúng đã được sử dụng làm chuẩn để sàng lọc các biến trong các dự án mô hình rủi ro tín dụng như xác suất vỡ nợ. Chúng giúp khám phá dữ liệu và các biến. Nó cũng được sử dụng trong dự án phân tích tiếp thị như mô hình phân khúc khách hàng, v.v.</p>
+<h2 id="mo-hinh-Logistic-regression"><a href="#mo-hinh-Logistic-regression" class="headerlink" title="mô hình Logistic regression :"></a>mô hình Logistic regression :</h2><p>Với cơ chế phân lớp đễ hiểu và các hàm kích hoạt cơ bản (activation) như sigmoid thì chúng ta có thể khai thác được rất nhiều từ dữ liệu</p>
+<p>Về chi tiết cụ thể về cơ chế hoạt động của Logistic regression và hàm activation sigmoid thì mời các bạn các bạn đón đọc trang web rất uy tín dưới đây</p>
+<p><a target="_blank" rel="noopener" href="https://machinelearningcoban.com/2017/01/27/logisticregression/">machinelearningcoban.com</a></p>
+<h2 id="Weight-of-Evidence-WOE"><a href="#Weight-of-Evidence-WOE" class="headerlink" title="Weight of Evidence(WOE)"></a>Weight of Evidence(WOE)</h2><p><strong>WOE = In(% of non-events / % of events)</strong></p>
+<p>WOE : Trọng số cho biết sức mạnh dự đoán của một biến độc lập liên quan đến biến phụ thuộc. Giúp chuyển đổi một biến độc lập liên tục thành một tập hợp các nhóm hoặc bin dựa trên sự giống nhau của phân phối biến phụ thuộc.</p>
+<h2 id="Information-Value-IV"><a href="#Information-Value-IV" class="headerlink" title="Information Value(IV):"></a>Information Value(IV):</h2><p><strong>IV = ∑ (% of non-events - % of events) * WOE</strong></p>
+<p>IV là một trong những kỹ thuật hữu ích nhất để chọn các biến quan trọng trong mô hình dự đoán. Nó giúp xếp hạng các biến trên cơ sở tầm quan trọng của chúng.</p>
+<p>Các bạn có thể tham khảo thêm về WOE và IV qua các bài viết dưới đây </p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/@sundarstyles89/weight-of-evidence-and-information-value-using-python-6f05072e83eb">medium.com</a><br><a target="_blank" rel="noopener" href="https://www.kaggle.com/pavansanagapati/weight-of-evidence-woe-information-value-iv">kaggle.com</a></p>
+<hr>
+<h2 id="Thuc-hanh-nao"><a href="#Thuc-hanh-nao" class="headerlink" title="Thực hành nào :"></a>Thực hành nào :</h2><p>Lý thuyết vậy là nhiều rồi, chắc đọc cũng chán ngấy cả người. Vậy chúng ta cùng thực hành chút cho nóng người nào. </p>
+<p>Về phương pháp biến đổi WOE thì có rất nhiều, mình cũng tự custom module để tính woe để theo ý mình nhưng cũng cần kết hợp với các thư viện có sẵn để đạt kết quả tốt nhât:</p>
+<p>Dưới đây là kết quả chúng chạy mô hình credit scorecard</p>
+<img src="/img/creadit_scorecard1_5.png" />
 
-                <img src="/img/creadit_scorecard1_6.png" />
+<img src="/img/creadit_scorecard1_6.png" />
 
-                <img src="/img/creadit_scorecard1_7.png" />
+<img src="/img/creadit_scorecard1_7.png" />
 
-                <img src="/img/creadit_scorecard1_8.png" />
+<img src="/img/creadit_scorecard1_8.png" />
 
-                <p>Vậy là chúng ta đã đi lướt qua khá nhiều kiến thức. </p>
-                <p>Ở kỳ sau chúng ta sẽ áp dụng nhiều phương pháp và mô hình machine learning hiện đại vào trong bài
-                  toán credit scorecard.</p>
+<p>Vậy là chúng  ta đã đi lướt qua khá nhiều kiến thức. </p>
+<p>Ở kỳ sau chúng ta sẽ áp dụng nhiều phương pháp và mô hình machine learning hiện đại vào trong bài toán credit scorecard.</p>
 
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Credit-Scorecard/" rel="tag">Credit-Scorecard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Science/" rel="tag">Data-Science</a></li></ul>
 
-              </div>
-              <footer class="entry-meta entry-footer">
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/20/Credit%20score%20chapter%202%20/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Credit Scorecard chapter 2 - Machine learning
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/03/Credit%20score%20chapter%200%20/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Credit Scorecard chapter 0 - Intro</div>
+    </a>
+  
+</nav>
 
+  
+</article>
 
-                <span class="ico-tags"></span>
-                <ul class="article-tag-list" itemprop="keywords">
-                  <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Credit-Scorecard/"
-                      rel="tag">Credit-Scorecard</a></li>
-                  <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Science/"
-                      rel="tag">Data-Science</a></li>
-                </ul>
+<!-- Table of Contents -->
 
-
-              </footer>
-              <hr class="entry-footer-hr">
-            </div>
-
-
-            <nav id="article-nav">
-
-              <a href="/2020/01/20/Credit%20score%20chapter%202%20/" id="article-nav-newer"
-                class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Newer</strong>
-                <div class="article-nav-title">
-
-                  Credit Scorecard chapter 2 - Machine learning
-
-                </div>
-              </a>
-
-
-              <a href="/2020/01/03/Credit%20score%20chapter%200%20/" id="article-nav-older"
-                class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Older</strong>
-                <div class="article-nav-title">Credit Scorecard chapter 0 - Intro</div>
-              </a>
-
-            </nav>
-
-
-          </article>
-
-          <!-- Table of Contents -->
-
-          <aside id="sidebar">
-            <div id="toc" class="toc-article">
-              <strong class="toc-title">Contents</strong>
-
-              <ol class="nav">
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#Bieu-do-truc-quan-hoa-du-lieu"><span
-                      class="nav-number">1.</span> <span class="nav-text">Biểu đồ trực quan hóa dữ liệu</span></a></li>
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#Gioi-thieu"><span
-                      class="nav-number">2.</span> <span class="nav-text">Giới thiệu :</span></a></li>
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#mo-hinh-Logistic-regression"><span
-                      class="nav-number">3.</span> <span class="nav-text">mô hình Logistic regression :</span></a></li>
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#Weight-of-Evidence-WOE"><span
-                      class="nav-number">4.</span> <span class="nav-text">Weight of Evidence(WOE)</span></a></li>
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#Information-Value-IV"><span
-                      class="nav-number">5.</span> <span class="nav-text">Information Value(IV):</span></a></li>
-                <li class="nav-item nav-level-2"><a class="nav-link" href="#Thuc-hanh-nao"><span
-                      class="nav-number">6.</span> <span class="nav-text">Thực hành nào :</span></a></li>
-              </ol>
-
-            </div>
-          </aside>
-        </section>
-
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bieu-do-truc-quan-hoa-du-lieu"><span class="nav-number">1.</span> <span class="nav-text">Biểu đồ trực quan hóa dữ liệu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gioi-thieu"><span class="nav-number">2.</span> <span class="nav-text">Giới thiệu :</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mo-hinh-Logistic-regression"><span class="nav-number">3.</span> <span class="nav-text">mô hình Logistic regression :</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Weight-of-Evidence-WOE"><span class="nav-number">4.</span> <span class="nav-text">Weight of Evidence(WOE)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Information-Value-IV"><span class="nav-number">5.</span> <span class="nav-text">Information Value(IV):</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thuc-hanh-nao"><span class="nav-number">6.</span> <span class="nav-text">Thực hành nào :</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
       </div>
 
     </div>
@@ -365,42 +268,42 @@
   
 </nav> -->
     <footer id="footer" class="site-footer">
+  
 
-
-      <div class="clearfix container">
-        <div class="site-info">
-          &copy; 2021 Minh&#39;s Blog All Rights Reserved.
-
-        </div>
-        <div class="site-credit">
-          Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
-        </div>
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2021 Minh&#39;s Blog All Rights Reserved.
+        
       </div>
-    </footer>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
 
 
-    <!-- min height -->
+<!-- min height -->
 
-    <script>
-      var wrapdiv = document.getElementById("wrap");
-      var contentdiv = document.getElementById("content");
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
 
-      wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-
-
-    < !--headerblur min height-- >
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
 
 
-    </script>
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
 
-    <div style="display: none;">
-      <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
-    </div>
+<!-- mathjax config similar to math.stackexchange -->
 
-    <!-- mathjax config similar to math.stackexchange -->
-
-    <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -409,7 +312,7 @@
   });
 </script>
 
-    <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       tex2jax: {
         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
@@ -417,7 +320,7 @@
     });
 </script>
 
-    <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
     MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for(i=0; i < all.length; i += 1) {
@@ -426,26 +329,26 @@
     });
 </script>
 
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+<script src="/js/script.js"></script>
 
 
-    <script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/js/bootstrap.js"></script>
 
 
-
-
-    <script src="/js/script.js"></script>
-
-
-    <script src="/js/bootstrap.js"></script>
-
-
-    <script src="/js/main.js"></script>
+<script src="/js/main.js"></script>
 
 
 
@@ -465,5 +368,4 @@
   <a id="rocket" href="#top" class=""></a>
   <script type="text/javascript" src="/js/totop.js" async=""></script>
 </body>
-
 </html>
