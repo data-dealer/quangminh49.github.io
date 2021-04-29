@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Field Application chapter 2 - Django REST framework | Minh&#39;s Blog</title>
+  <title>Field Application chapter 2 - Setup môi trường với Docker | Minh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="Full-Stack" />
@@ -11,20 +11,20 @@
   
   
   
-  <meta name="description" content="Mình đã có gần 1 năm kinh nghiệm làm triển khai ERP, cũng như 2 năm làm việc tại 1 công ty lớn để thấy được việc quản lý dự án cùng triết lý phát triển dự án quan trọng thế nào. Nhiều dự án quản lý th">
+  <meta name="description" content="Như đã nói ở Bài giới thiệu, Giải pháp phía backend của chúng ta gồm có REST API với Django + Gunicorn + Nginx  cùng với database là mongoDb. Mới vậy mà đã một đống thứ phải cài đặt chưa kể team còn c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Field Application chapter 2 - Django REST framework">
+<meta property="og:title" content="Field Application chapter 2 - Setup môi trường với Docker">
 <meta property="og:url" content="https://quangminh49.github.io/2021/01/05/Field%20Application%20chapter%202/index.html">
 <meta property="og:site_name" content="Minh&#39;s Blog">
-<meta property="og:description" content="Mình đã có gần 1 năm kinh nghiệm làm triển khai ERP, cũng như 2 năm làm việc tại 1 công ty lớn để thấy được việc quản lý dự án cùng triết lý phát triển dự án quan trọng thế nào. Nhiều dự án quản lý th">
+<meta property="og:description" content="Như đã nói ở Bài giới thiệu, Giải pháp phía backend của chúng ta gồm có REST API với Django + Gunicorn + Nginx  cùng với database là mongoDb. Mới vậy mà đã một đống thứ phải cài đặt chưa kể team còn c">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://quangminh49.github.io/img/Field_Application_2_django.png">
+<meta property="og:image" content="https://quangminh49.github.io/img/docker.png">
 <meta property="article:published_time" content="2021-01-04T17:00:00.000Z">
-<meta property="article:modified_time" content="2021-04-29T04:48:16.658Z">
+<meta property="article:modified_time" content="2021-04-29T09:19:06.792Z">
 <meta property="article:author" content="Minh Nguyen">
 <meta property="article:tag" content="Full-Stack">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://quangminh49.github.io/img/Field_Application_2_django.png">
+<meta name="twitter:image" content="https://quangminh49.github.io/img/docker.png">
   
     <link rel="alternate" href="/atom.xml" title="Minh&#39;s Blog" type="application/atom+xml">
   
@@ -117,8 +117,8 @@
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="/img/Field_Application_2_django.png" rel="gallery_cko2f02yh0000f0phhmiw3snl">
-        <img src="/img/Field_Application_2_django.png" itemprop="image">
+      <a class="article-gallery-img fancybox" href="/img/docker.png" rel="gallery_cko2m4y2c0008vuph64fkfkag">
+        <img src="/img/docker.png" itemprop="image">
       </a>
     
   </div>
@@ -129,7 +129,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      Field Application chapter 2 - Django REST framework
+      Field Application chapter 2 - Setup môi trường với Docker
     </h1>
   
 
@@ -146,12 +146,51 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Mình đã có gần 1 năm kinh nghiệm làm triển khai ERP, cũng như 2 năm làm việc tại 1 công ty lớn để thấy được việc quản lý dự án cùng triết lý phát triển dự án quan trọng thế nào. Nhiều dự án quản lý theo mô hình truyền thống (waterfall, ..) đã gặp giới hạn về khả năng thích ứng trước sự thay đổi liên tục từ khách hàng và thời gian hoàn thiện sản phẩm chậm. Cá biệt, có dự án mà mình chứng kiến xa lầy tới 5 năm mà sản phẩm vẫn không hoàn thiện.</p>
-<p>Do vậy ngay từ đầu, team mình đã áp dụng mô hình Agile. Quả thực mô hình Agile đã thực sự hiệu quả và phù hợp với nguồn lực hiện có và được minh chứng bằng sự thành công của dự án. </p>
+        <p>Như đã nói ở Bài giới thiệu, Giải pháp phía backend của chúng ta gồm có REST API với Django + Gunicorn + Nginx  cùng với database là mongoDb. Mới vậy mà đã một đống thứ phải cài đặt chưa kể team còn có nhiều người, dùng nhiều hệ điều hành khác nhau và đủ thứ không tương thích làm ta phải mệt mỏi. </p>
+<p>Nhưng ngày đó đã xa rồi vì một chú cá voi xanh tên Docker đã xuất hiện trong đời mình. Docker là một nền tảng để cung cấp cách để building, deploying và running ứng dụng dễ dàng hơn bằng cách sử dụng các containers (trên nền tảng ảo hóa). Với Docker thì mọi việc setup, deploy với mình trở lên dễ dàng hơn bao giờ hết, mình có thể tự tin nhâm nhi tách trà trước mọi thay đổi về môi trường phát triển từ Local server cho đến các cloud sever, hay setup môi trường cho các member mới.</p>
 <span id="more"></span>
 
-<p><em>Lưu ý: Tuy các kiến thức là thật nhưng các hoàn cảnh, nhân tố, data, cty G .. trong series là hoàn toàn hư cấu và mang tính minh hoạ.</em></p>
+<h2 id="Cac-khai-niem-co-ban"><a href="#Cac-khai-niem-co-ban" class="headerlink" title="Các khái niệm cơ bản"></a>Các khái niệm cơ bản</h2><h3 id="Docker-Image"><a href="#Docker-Image" class="headerlink" title="Docker Image :"></a>Docker Image :</h3><p>các bộ cài (centos, nodejs, python …)</p>
+<h3 id="Container"><a href="#Container" class="headerlink" title="Container:"></a>Container:</h3><p>Máy ảo được tạo từ Image</p>
+<h3 id="Docker-volume"><a href="#Docker-volume" class="headerlink" title="Docker volume"></a>Docker volume</h3><p>Là một nơi lưu trữ data nằm ngoài container, mục đích không làm mất data khi xóa container<br>Sử dụng Volume khi nào </p>
+<ul>
+<li>Khi chia sẻ dữ liệu giữa nhiều container đang chạy.</li>
+<li>Lưu dữ liệu tới một server remote hoặc cloud.</li>
+<li>Khi cần backup, restore hoặc migrate dữ liệu từ Docker Host này sang Docker Host khác.</li>
+</ul>
+<h3 id="Docker-Network"><a href="#Docker-Network" class="headerlink" title="Docker Network"></a>Docker Network</h3><p>Để kết nối các container trong cùng mạng hoặc khác mạng với nhau.</p>
+<h2 id="Cai-dat-docker"><a href="#Cai-dat-docker" class="headerlink" title="Cài đặt docker"></a>Cài đặt docker</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum update -y</span><br><span class="line">yum install -y docker</span><br><span class="line">service docker start</span><br><span class="line">chkconfig docker on</span><br><span class="line">curl -L <span class="string">&quot;https://github.com/docker/compose/releases/download/1.11.2/docker-compose-<span class="subst">$(uname -s)</span>-<span class="subst">$(uname -m)</span>&quot;</span> -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
 
+<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p>Chỉ ra các bước để build image:</p>
+<ul>
+<li>FROM : lấy 1 image trên docker hub</li>
+<li>LABEL: Thông tin người bảo trì dockerfile </li>
+<li>ENV: thiết lập biến môi trường</li>
+<li>RUN: chạy khi build image</li>
+<li>COPY: sao Chép file vào thư mục container</li>
+<li>ADD: sao Chép file vào thư mục container</li>
+<li>CMD:  Thực hiện khi ta 1 container</li>
+<li>WORKDIR: thư mục gốc</li>
+</ul>
+<p>Vd tạo file Dockerfile</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">FROM</span> <span class="string">centos:7</span></span><br><span class="line"><span class="string">RUN</span> <span class="string">yum</span> <span class="string">-y</span> <span class="string">update</span> <span class="string">&amp;&amp;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">yum</span> <span class="string">-y</span> <span class="string">install</span> <span class="string">httpd</span> <span class="string">php</span></span><br><span class="line"><span class="string">WORKDIR</span> <span class="string">/var/www/html</span></span><br><span class="line"><span class="string">ADD</span> <span class="string">./code</span> <span class="string">/var/www/html</span></span><br><span class="line"><span class="string">EXPOSE</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h2><p>kết hợp nhiều docker image, Dockerfile để chạy đồng thời.</p>
+<p>Vd tạo file docker-compose.yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span>                                                                                       </span><br><span class="line">  <span class="attr">web:</span>                                                                                          </span><br><span class="line">    <span class="attr">build:</span> <span class="string">.</span></span><br><span class="line">	<span class="attr">command:</span> [<span class="string">&quot;/usr/sbin/httpd&quot;</span>,<span class="string">&quot;-D&quot;</span>,<span class="string">&quot;FOREGROUND&quot;</span>]           </span><br><span class="line">    <span class="attr">ports:</span>                                                                                      </span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;80:80&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Cac-lenh-thong-thuong"><a href="#Cac-lenh-thong-thuong" class="headerlink" title="Các lệnh thông thường"></a>Các lệnh thông thường</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it [Container ID] bash <span class="comment"># Vào Container để chạy lệnh</span></span><br><span class="line"><span class="built_in">exit</span> <span class="comment"># Thoát khỏi container</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker stop $(docker ps -q)     <span class="comment"># stop all containers</span></span><br><span class="line">docker rm $(docker ps -a -q) -f <span class="comment"># remove all containers</span></span><br><span class="line">docker rmi $(docker images -q)  <span class="comment"># remove all docker images</span></span><br></pre></td></tr></table></figure>
+
+<p>Thao tác với docker-compose</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build            <span class="comment"># Build image</span></span><br><span class="line">docker-compose up               <span class="comment"># Run container</span></span><br><span class="line">docker-compose stop             <span class="comment"># Stop</span></span><br></pre></td></tr></table></figure>
+
+<p>Thao tác với volume</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker volume create            <span class="comment"># Tạo mạng mới</span></span><br><span class="line">docker volume inspect           <span class="comment"># Xem chi tiết mạng</span></span><br><span class="line">docker volume ls                <span class="comment"># Hiển thị những mạng đang có</span></span><br><span class="line">docker volume rm                <span class="comment"># Xóa volume</span></span><br><span class="line">docker volume prune             <span class="comment"># Xóa toàn bộ volume</span></span><br></pre></td></tr></table></figure>
+
+<p>Thao tác với network</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker network create           <span class="comment"># Tạo mạng mới</span></span><br><span class="line">docker network inspect          <span class="comment"># Xem chi tiết mạng</span></span><br><span class="line">docker network ls               <span class="comment"># Hiển thị những mạng đang có</span></span><br><span class="line">docker network rm               <span class="comment"># Xóa mạng</span></span><br><span class="line">docker network prune            <span class="comment"># Xóa đồng loạt các mạng không sử dụng</span></span><br><span class="line">docker network connect          <span class="comment"># Tạo kết nối mạng</span></span><br><span class="line">docker network disconnect       <span class="comment"># Ngắt kết nối mạng</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -168,11 +207,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/02/14/CI-CD/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/01/08/Field%20Application%20chapter%203/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          CI/CD chapter 0 - Intro
+          Field Application chapter 3 - Django REST framework
         
       </div>
     </a>
@@ -194,7 +233,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav">None</ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cac-khai-niem-co-ban"><span class="nav-number">1.</span> <span class="nav-text">Các khái niệm cơ bản</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Image"><span class="nav-number">1.1.</span> <span class="nav-text">Docker Image :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Container"><span class="nav-number">1.2.</span> <span class="nav-text">Container:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-volume"><span class="nav-number">1.3.</span> <span class="nav-text">Docker volume</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Network"><span class="nav-number">1.4.</span> <span class="nav-text">Docker Network</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cai-dat-docker"><span class="nav-number">2.</span> <span class="nav-text">Cài đặt docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile"><span class="nav-number">3.</span> <span class="nav-text">Dockerfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Compose"><span class="nav-number">4.</span> <span class="nav-text">Docker Compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cac-lenh-thong-thuong"><span class="nav-number">5.</span> <span class="nav-text">Các lệnh thông thường</span></a></li></ol>
     
     </div>
   </aside>

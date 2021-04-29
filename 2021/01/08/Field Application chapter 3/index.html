@@ -3,29 +3,28 @@
 <head>
   <meta charset="utf-8">
   
-  <title>CI/CD chapter 0 - Intro | Minh&#39;s Blog</title>
+  <title>Field Application chapter 3 - Django REST framework | Minh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="DevOpsCI/CD" />
+  <meta name="keywords" content="Full-Stack" />
   
   
   
   
-  <meta name="description" content="Ngày nay khi triết lý Agile được áp dụng ở mọi nơi. Cũng chính vì Tính nhanh và linh hoạt của Agile mà vai trò của quy trình CI&#x2F;CD (Continuous Integration&#x2F; Continuous Delivery) lại càng trở lên cấp th">
+  <meta name="description" content="Từ bài này Mình sẽ đi sâu hơn về phần kỹ thuật, bao gồm cả Software Architect và Coding, Phần Backend mình làm với Django REST framework nên kiến thức Python cơ bản là rất cần thiết cho các bạn nào mu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CI&#x2F;CD chapter 0 - Intro">
-<meta property="og:url" content="https://quangminh49.github.io/2021/02/14/CI-CD/index.html">
+<meta property="og:title" content="Field Application chapter 3 - Django REST framework">
+<meta property="og:url" content="https://quangminh49.github.io/2021/01/08/Field%20Application%20chapter%203/index.html">
 <meta property="og:site_name" content="Minh&#39;s Blog">
-<meta property="og:description" content="Ngày nay khi triết lý Agile được áp dụng ở mọi nơi. Cũng chính vì Tính nhanh và linh hoạt của Agile mà vai trò của quy trình CI&#x2F;CD (Continuous Integration&#x2F; Continuous Delivery) lại càng trở lên cấp th">
+<meta property="og:description" content="Từ bài này Mình sẽ đi sâu hơn về phần kỹ thuật, bao gồm cả Software Architect và Coding, Phần Backend mình làm với Django REST framework nên kiến thức Python cơ bản là rất cần thiết cho các bạn nào mu">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://quangminh49.github.io/img/CICD_intro_0.jpeg">
-<meta property="article:published_time" content="2021-02-14T03:17:55.000Z">
-<meta property="article:modified_time" content="2021-04-29T06:44:52.764Z">
+<meta property="og:image" content="https://quangminh49.github.io/img/Field_Application_2_django.png">
+<meta property="article:published_time" content="2021-01-07T17:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-29T08:52:25.000Z">
 <meta property="article:author" content="Minh Nguyen">
-<meta property="article:tag" content="DevOps">
-<meta property="article:tag" content="CI&#x2F;CD">
+<meta property="article:tag" content="Full-Stack">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://quangminh49.github.io/img/CICD_intro_0.jpeg">
+<meta name="twitter:image" content="https://quangminh49.github.io/img/Field_Application_2_django.png">
   
     <link rel="alternate" href="/atom.xml" title="Minh&#39;s Blog" type="application/atom+xml">
   
@@ -112,14 +111,14 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-CI-CD" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-Field Application chapter 3" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="/img/CICD_intro_0.jpeg" rel="gallery_cko03wuuo0004tbph4i0x861x">
-        <img src="/img/CICD_intro_0.jpeg" itemprop="image">
+      <a class="article-gallery-img fancybox" href="/img/Field_Application_2_django.png" rel="gallery_cko2m4tvc0006vuphdmsh12zk">
+        <img src="/img/Field_Application_2_django.png" itemprop="image">
       </a>
     
   </div>
@@ -130,7 +129,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      CI/CD chapter 0 - Intro
+      Field Application chapter 3 - Django REST framework
     </h1>
   
 
@@ -138,8 +137,8 @@
     
     <div class="article-meta">
       
-	<a href="/2021/02/14/CI-CD/" class="article-date">
-	  <time datetime="2021-02-14T03:17:55.000Z" itemprop="datePublished">February 14, 2021</time>
+	<a href="/2021/01/08/Field%20Application%20chapter%203/" class="article-date">
+	  <time datetime="2021-01-07T17:00:00.000Z" itemprop="datePublished">January 8, 2021</time>
 	</a>
 
        
@@ -147,14 +146,32 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Ngày nay khi triết lý Agile được áp dụng ở mọi nơi. Cũng chính vì Tính nhanh và linh hoạt của Agile mà vai trò của quy trình CI/CD (Continuous Integration/ Continuous Delivery) lại càng trở lên cấp thiêt hơn bao giờ hết.</p>
-<p>Sau một thời gian mình triển khai các service từ Web app, Rest Api cho đến Database bằng cơm, và khi các service càng nhiều và phức tạp thì việc triển khai service bằng cơm trỏ lên khá mệt mỏi và thiêú chính xác. Do vậy mình đã quyết tâm áp dụng các giải pháp CI/CD vào các Project hiện tại, cũng là để chuẩn bị cho một tầm nhìn dài hạn hơn.</p>
+        <p>Từ bài này Mình sẽ đi sâu hơn về phần kỹ thuật, bao gồm cả Software Architect và Coding, Phần Backend mình làm với Django REST framework nên kiến thức Python cơ bản là rất cần thiết cho các bạn nào muốn làm theo. </p>
 <span id="more"></span>
 
-<p>CI/CD là một bộ đôi công việc, bao gồm CI (Continuous Integration) và CD (Continuous Delivery), ý nói là quá trình tích hợp (integration) thường xuyên, nhanh chóng hơn khi code cũng như thường xuyên cập nhật phiên bản mới (delivery).</p>
-<p>Ngày nay có rất nhiều công cụ hỗ trợ chúng ta trong quá trình CI/CD, mỗi công cụ đều có ưu và nhược điểm riêng, và để có thể ứng dụng chúng thì mỗi DevOps phải chuẩn bị cho mình môt nền tảng kiến thức vững chắc để có thể thực sự đáp ứng cả quy trình CI/CD.</p>
-<p>Trong series này, mình sẽ cố viết các bài với Jenkins và GitLab 9, các tool khác thì khi chúng ta nắm vững lý thuyết thì cũng dễ dàng triển khai thôi.</p>
-<img src="/img/CICD_intro_1.png"/>
+<p>Tại sao mình lại chọn Django REST framework (DRF) ?</p>
+<ul>
+<li>Đầu tiên, DRF dùng Python, ngôn ngữ đơn giản, hiệu quả mà mình đã có hơn 4 năm kinh nghiệm. </li>
+<li>DRF cung cấp bộ khung hầu như đã gồm tất cả những gì cần để phát triển một REST API hoàn thiện.</li>
+<li>Bộ docs của DRF rất đầy đủ, theo mình thấy là đầy đủ nhất trong các REST Framework</li>
+</ul>
+<p><em>Lưu ý: Tuy các kiến thức là thật nhưng các hoàn cảnh, nhân tố, data, cty G .. trong series là hoàn toàn hư cấu và mang tính minh hoạ.</em></p>
+<h1 id="Khoi-tao-du-an-voi-DRF"><a href="#Khoi-tao-du-an-voi-DRF" class="headerlink" title="Khởi tạo dự án với DRF"></a>Khởi tạo dự án với DRF</h1><ol>
+<li>Tạo virtual environment - môi trường ảo cho Python: </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv venv </span><br><span class="line"><span class="built_in">source</span> venv activate</span><br><span class="line">pip install Django==3.0.5</span><br><span class="line">pip install djangorestframework==3.11.1</span><br></pre></td></tr></table></figure>
+
+
+<ol>
+<li>tạo mới dự án : </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject fieldapi &amp;&amp; <span class="built_in">cd</span> fieldapi</span><br><span class="line">python manage.py startapp fieldapp</span><br></pre></td></tr></table></figure>
+
+<p>Bây giờ dự án đã có chút hình hài rồi. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">|-- fieldapi</span><br><span class="line">|   |-- asgi.py</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- __pycache__</span><br><span class="line">|   |   |-- __init__.cpython-36.pyc</span><br><span class="line">|   |   &#96;-- settings.cpython-36.pyc</span><br><span class="line">|   |-- settings.py</span><br><span class="line">|   |-- urls.py</span><br><span class="line">|   &#96;-- wsgi.py</span><br><span class="line">|-- fieldapp</span><br><span class="line">|   |-- admin.py</span><br><span class="line">|   |-- apps.py</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- migrations</span><br><span class="line">|   |   &#96;-- __init__.py</span><br><span class="line">|   |-- models.py</span><br><span class="line">|   |-- tests.py</span><br><span class="line">|   &#96;-- views.py</span><br><span class="line">&#96;-- manage.py</span><br><span class="line">1 directory, 6 files</span><br></pre></td></tr></table></figure>
+
+
+
 
       
     </div>
@@ -162,7 +179,7 @@
       
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI-CD/" rel="tag">CI/CD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DevOps/" rel="tag">DevOps</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Full-Stack/" rel="tag">Full-Stack</a></li></ul>
 
       
     </footer>
@@ -172,19 +189,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/02/16/CI-CD%20with%20jenkins%20part%201/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/02/14/CI-CD/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          CI/CD chapter 1 - Jenkins/Github/EC2
+          CI/CD chapter 0 - Intro
         
       </div>
     </a>
   
   
-    <a href="/2021/01/08/Field%20Application%20chapter%203/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/01/05/Field%20Application%20chapter%202/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Field Application chapter 3 - Django REST framework</div>
+      <div class="article-nav-title">Field Application chapter 2 - Setup môi trường với Docker</div>
     </a>
   
 </nav>
@@ -198,7 +215,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav">None</ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Khoi-tao-du-an-voi-DRF"><span class="nav-number">1.</span> <span class="nav-text">Khởi tạo dự án với DRF</span></a></li></ol>
     
     </div>
   </aside>
