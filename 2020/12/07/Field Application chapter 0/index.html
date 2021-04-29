@@ -11,16 +11,16 @@
   
   
   
-  <meta name="description" content="Năm vừa qua thì mình đã tham gia một dự án khá dài hơi trong đó vai trò của mình khá rộng, vừa tham gia thiết kế giải pháp cho đến thiết kế kiến trúc rồi cả Full Stack Dev trong team luôn. Cũng nhờ vậ">
+  <meta name="description" content="Năm vừa qua thì mình đã tham gia một dự án khá dài hơi trong đó vai trò của mình khá rộng, vừa tham gia thiết kế giải pháp cho đến thiết kế kiến trúc rồi cả Full Stack luôn. Cũng nhờ vậy mà có chút kh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Field Application chapter 0 - Intro">
 <meta property="og:url" content="https://quangminh49.github.io/2020/12/07/Field%20Application%20chapter%200/index.html">
 <meta property="og:site_name" content="Minh&#39;s Blog">
-<meta property="og:description" content="Năm vừa qua thì mình đã tham gia một dự án khá dài hơi trong đó vai trò của mình khá rộng, vừa tham gia thiết kế giải pháp cho đến thiết kế kiến trúc rồi cả Full Stack Dev trong team luôn. Cũng nhờ vậ">
+<meta property="og:description" content="Năm vừa qua thì mình đã tham gia một dự án khá dài hơi trong đó vai trò của mình khá rộng, vừa tham gia thiết kế giải pháp cho đến thiết kế kiến trúc rồi cả Full Stack luôn. Cũng nhờ vậy mà có chút kh">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://quangminh49.github.io/img/Field_Application_0_thumb.png">
 <meta property="article:published_time" content="2020-12-06T17:00:00.000Z">
-<meta property="article:modified_time" content="2021-04-28T11:05:02.750Z">
+<meta property="article:modified_time" content="2021-04-29T04:31:42.531Z">
 <meta property="article:author" content="Minh Nguyen">
 <meta property="article:tag" content="Full-Stack">
 <meta name="twitter:card" content="summary">
@@ -93,6 +93,8 @@
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="/tags/Data-Science"> <a class="" href="/tags/Data-Science">data science</a> </li>
                     
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="/tags/Full-Stack"> <a class="" href="/tags/Full-Stack">full stack</a> </li>
+                    
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663" linktext="about"> <a class="" href="/about">About</a> </li>
                     
               </ul>
@@ -144,25 +146,23 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Năm vừa qua thì mình đã tham gia một dự án khá dài hơi trong đó vai trò của mình khá rộng, vừa tham gia thiết kế giải pháp cho đến thiết kế kiến trúc rồi cả Full Stack Dev trong team luôn. Cũng nhờ vậy mà có chút khinh nghiệm để viết series Field Application này. </p>
-<p>Series Field Application sẽ mô tả quá trình mà một Dự án phần mềm từ lúc bắt đâù cho đến khi đi vào vận hành như thế nào. Những kiến thức trình bày trong series hoàn toàn là tự mình mày mò tìm hiếu và áp dụng thành công trong dự án.</p>
+        <p>Năm vừa qua thì mình đã tham gia một dự án khá dài hơi trong đó vai trò của mình khá rộng, vừa tham gia thiết kế giải pháp cho đến thiết kế kiến trúc rồi cả Full Stack luôn. Cũng nhờ vậy mà có chút khinh nghiệm để viết series Field Application này. </p>
+<p>Series sẽ mô tả quá trình mà một Dự án phần mềm từ lúc bắt đâù cho đến khi đi vào vận hành như thế nào. Những kiến thức trình bày trong series hoàn toàn là tự mình mày mò tìm hiếu và áp dụng thành công trong dự án.</p>
+<span id="more"></span>
+
 <p>Các nội dung chính: </p>
 <ul>
 <li>Phân tích thiết kế hệ thống</li>
 <li>Quy trình phát triển</li>
 <li>Lập trình:<br>  Backend: Django<br>  Mobile: React Native</li>
 </ul>
-<p>Bài mở đầu mình sẽ giới thiệu về hoàn cảnh, các giải pháp, cũng như triết lý phát triển dự án. </p>
-<p><em>Lưu ý: Tuy các kiến thức là thật nhưng các hoàn cảnh, nhân tố, data, cty G .. trong series là hoàn toàn hư cấu và mang tính minh hoạ</em></p>
-<span id="more"></span>
-
-
+<p><em>Lưu ý: Tuy các kiến thức là thật nhưng các hoàn cảnh, nhân tố, data, cty G .. trong series là hoàn toàn hư cấu và mang tính minh hoạ.</em></p>
 <h2 id="Toan-canh-du-an"><a href="#Toan-canh-du-an" class="headerlink" title="Toàn cảnh dự án"></a>Toàn cảnh dự án</h2><p>Công ty G - một công ty hoạt động trong lĩnh vực phân phối sỉ và lẻ hàng tiêu dùng với hơn 300 nhân viên thị trường. Quy mô và doanh thu của công ty G luôn tăng trưởng trong 3 năm gần đây. Tuy nhiên Tốc độ tăng trưởng doanh thu lại kém hẳn so với tốc độ tăng nhân lực, công ty đã gặp gặp rất nhiều khó khăn khi quy mô mở rộng quá nhanh còn quy trình và công nghệ quản lý thì lại không đáp ứng nổi. </p>
 <h3 id="Cac-van-de"><a href="#Cac-van-de" class="headerlink" title="Các vấn đề"></a>Các vấn đề</h3><ul>
-<li>Khó khăn quản lý chất lượng (nhân viên đi làm đối phó, không đi làm).</li>
-<li>Lộ thông tin khách hàng, mất lợi thế cạnh tranh do dữ liệu được lưu truyền bằng giấy, excel,.. </li>
+<li>Nhân viên công ty phân bố nhiều vùng miền và làm việc tự do =&gt; Khó khăn quản lý chất lượng (nhân viên đi làm đối phó, không đi làm).</li>
+<li>Dữ liệu được lưu truyền bằng giấy, excel,..  =&gt; Lộ thông tin khách hàng, mất lợi thế cạnh tranh.</li>
+<li>Truyền thông các chính sách tới nhân viên chậm chạp sai lệch.</li>
 <li>Quản lý không nắm được tình hình danh mục.</li>
-<li>Truyền thông các chính sách tới nhân viên chậm chạp </li>
 </ul>
 <p>Do vậy đội dự án của mình được mời làm giải pháp quản lý mảng thị trường cho công G để giải quyết những vấn đề trên.</p>
 <h3 id="Mo-hinh-hoat-dong"><a href="#Mo-hinh-hoat-dong" class="headerlink" title="Mô hình hoạt động"></a>Mô hình hoạt động</h3><ul>
@@ -173,27 +173,13 @@
 <p>UseCase Diagram dươí đây sẽ diễn tả nhiệm vụ của các bên: </p>
 <img src="/img/Field_Application_0_UseCase.png" text-align="center"/>
 
-<h3 id="Giai-phap"><a href="#Giai-phap" class="headerlink" title="Giải pháp"></a>Giải pháp</h3><p>Chúng ta sẽ build một Ứng dụng mobile, để phục vụ tất cả các đối tượng trên. Ứng dụng sẽ dựa trên các nền tảng công nghệ dưới đây</p>
+<h3 id="Giai-phap"><a href="#Giai-phap" class="headerlink" title="Giải pháp"></a>Giải pháp</h3><p>Với tình hình công ty hiện tại thì chúng ta cần xây dựng một ứng dụng đáp ứng các vấn đề:</p>
+<img src="/img/Field_Application_0_Solution.png" text-align="center"/>
+
+<p>Để phù hợp với tính di động cao của phần lớn người dùng và tối ưu các trải nghiệm Ứng dụng Mobile được chọn để phát triển giải pháp quản lý cho cty G. Ứng dụng sẽ dựa trên các nền tảng công nghệ dưới đây:</p>
 <img src="/img/Field_Application_0_TechSolution.png" text-align="center"/>
 
-
-<h2 id="Mo-hinh-phat-trien-du-an-Agile"><a href="#Mo-hinh-phat-trien-du-an-Agile" class="headerlink" title="Mô hình phát triển dự án Agile"></a>Mô hình phát triển dự án Agile</h2><p>Team mình dùng mô hình Agile để phát triển dự án vì nó thực sự hiệu quả và phù hợp với nguồn lực hiện có. </p>
-<img src="/img/Field_Application_0_Agile.png" text-align="center"/>
-
-<h3 id="ban-tuyen-ngon-Agile"><a href="#ban-tuyen-ngon-Agile" class="headerlink" title="bản tuyên ngôn Agile:"></a>bản tuyên ngôn Agile:</h3><ol>
-<li>Cá nhân và sự tương tác hơn là quy trình và công cụ.</li>
-<li>Phần mềm chạy tốt hơn là tài liệu đầy đủ.</li>
-<li>Cộng tác với khách hàng hơn là đàm phán hợp đồng.</li>
-<li>Phản hồi với sự thay đổi hơn là bám theo kế hoạch</li>
-</ol>
-<h3 id="Uu-diem"><a href="#Uu-diem" class="headerlink" title="Ưu điểm:"></a>Ưu điểm:</h3><ol>
-<li>Giảm thời gian cần thiết để tận dụng một số tính năng của hệ thống.</li>
-<li>Kết quả cuối cùng là phần mềm chất lượng cao trong thời gian ít nhất có thể và sự hài lòng của khách hàng.</li>
-</ol>
-<h3 id="Nhuoc-diem"><a href="#Nhuoc-diem" class="headerlink" title="Nhược điểm:"></a>Nhược điểm:</h3><ol>
-<li>Yêu cầu cao về kỹ năng và ý thức của các thành viên.</li>
-<li>Tài liệu thường có chậm và ít.</li>
-</ol>
+<p>Giải pháp và các nội dung chính đã cơ bản xong, dự án sẽ bước vào các giai đoạn xây dựng và triển khai liên tục ngay sau đó.</p>
 
       
     </div>
@@ -211,11 +197,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/12/07/CRM%20system/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/12/08/Field%20Application%20chapter%201/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          CRM SYSTEM
+          Field Application chapter 1 - Agile
         
       </div>
     </a>
@@ -237,7 +223,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Toan-canh-du-an"><span class="nav-number">1.</span> <span class="nav-text">Toàn cảnh dự án</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cac-van-de"><span class="nav-number">1.1.</span> <span class="nav-text">Các vấn đề</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mo-hinh-hoat-dong"><span class="nav-number">1.2.</span> <span class="nav-text">Mô hình hoạt động</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Giai-phap"><span class="nav-number">1.3.</span> <span class="nav-text">Giải pháp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mo-hinh-phat-trien-du-an-Agile"><span class="nav-number">2.</span> <span class="nav-text">Mô hình phát triển dự án Agile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ban-tuyen-ngon-Agile"><span class="nav-number">2.1.</span> <span class="nav-text">bản tuyên ngôn Agile:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Uu-diem"><span class="nav-number">2.2.</span> <span class="nav-text">Ưu điểm:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nhuoc-diem"><span class="nav-number">2.3.</span> <span class="nav-text">Nhược điểm:</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Toan-canh-du-an"><span class="nav-number">1.</span> <span class="nav-text">Toàn cảnh dự án</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cac-van-de"><span class="nav-number">1.1.</span> <span class="nav-text">Các vấn đề</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mo-hinh-hoat-dong"><span class="nav-number">1.2.</span> <span class="nav-text">Mô hình hoạt động</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Giai-phap"><span class="nav-number">1.3.</span> <span class="nav-text">Giải pháp</span></a></li></ol></li></ol>
     
     </div>
   </aside>
@@ -253,6 +239,8 @@
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
     <a href="/tags/Data-Science" class="mobile-nav-link">Data Science</a>
+  
+    <a href="/tags/Full-Stack" class="mobile-nav-link">Full Stack</a>
   
     <a href="/about" class="mobile-nav-link">About</a>
   
