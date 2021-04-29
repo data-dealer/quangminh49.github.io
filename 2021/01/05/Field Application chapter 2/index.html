@@ -3,29 +3,28 @@
 <head>
   <meta charset="utf-8">
   
-  <title>CI/CD chapter 0 - Intro | Minh&#39;s Blog</title>
+  <title>Field Application chapter 2 - Django REST framework | Minh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="DevOpsCI/CD" />
+  <meta name="keywords" content="Full-Stack" />
   
   
   
   
-  <meta name="description" content="Ngày nay khi triết lý Agile được áp dụng ở mọi nơi. Cũng chính vì Tính nhanh và linh hoạt của Agile mà vai trò của quy trình CI&#x2F;CD (Continuous Integration&#x2F; Continuous Delivery) lại càng trở lên cấp th">
+  <meta name="description" content="Mình đã có gần 1 năm kinh nghiệm làm triển khai ERP, cũng như 2 năm làm việc tại 1 công ty lớn để thấy được việc quản lý dự án cùng triết lý phát triển dự án quan trọng thế nào. Nhiều dự án quản lý th">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CI&#x2F;CD chapter 0 - Intro">
-<meta property="og:url" content="https://quangminh49.github.io/2021/02/14/CI-CD/index.html">
+<meta property="og:title" content="Field Application chapter 2 - Django REST framework">
+<meta property="og:url" content="https://quangminh49.github.io/2021/01/05/Field%20Application%20chapter%202/index.html">
 <meta property="og:site_name" content="Minh&#39;s Blog">
-<meta property="og:description" content="Ngày nay khi triết lý Agile được áp dụng ở mọi nơi. Cũng chính vì Tính nhanh và linh hoạt của Agile mà vai trò của quy trình CI&#x2F;CD (Continuous Integration&#x2F; Continuous Delivery) lại càng trở lên cấp th">
+<meta property="og:description" content="Mình đã có gần 1 năm kinh nghiệm làm triển khai ERP, cũng như 2 năm làm việc tại 1 công ty lớn để thấy được việc quản lý dự án cùng triết lý phát triển dự án quan trọng thế nào. Nhiều dự án quản lý th">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://quangminh49.github.io/img/CICD_intro_0.png">
-<meta property="article:published_time" content="2021-02-14T03:17:55.000Z">
-<meta property="article:modified_time" content="2021-04-29T04:36:54.179Z">
+<meta property="og:image" content="https://quangminh49.github.io/img/Field_Application_2_django.png">
+<meta property="article:published_time" content="2021-01-04T17:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-29T04:48:16.658Z">
 <meta property="article:author" content="Minh Nguyen">
-<meta property="article:tag" content="DevOps">
-<meta property="article:tag" content="CI&#x2F;CD">
+<meta property="article:tag" content="Full-Stack">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://quangminh49.github.io/img/CICD_intro_0.png">
+<meta name="twitter:image" content="https://quangminh49.github.io/img/Field_Application_2_django.png">
   
     <link rel="alternate" href="/atom.xml" title="Minh&#39;s Blog" type="application/atom+xml">
   
@@ -112,14 +111,14 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-CI-CD" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-Field Application chapter 2" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="/img/CICD_intro_0.png" rel="gallery_cko03wuuo0004tbph4i0x861x">
-        <img src="/img/CICD_intro_0.png" itemprop="image">
+      <a class="article-gallery-img fancybox" href="/img/Field_Application_2_django.png" rel="gallery_cko2f02yh0000f0phhmiw3snl">
+        <img src="/img/Field_Application_2_django.png" itemprop="image">
       </a>
     
   </div>
@@ -130,7 +129,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      CI/CD chapter 0 - Intro
+      Field Application chapter 2 - Django REST framework
     </h1>
   
 
@@ -138,8 +137,8 @@
     
     <div class="article-meta">
       
-	<a href="/2021/02/14/CI-CD/" class="article-date">
-	  <time datetime="2021-02-14T03:17:55.000Z" itemprop="datePublished">February 14, 2021</time>
+	<a href="/2021/01/05/Field%20Application%20chapter%202/" class="article-date">
+	  <time datetime="2021-01-04T17:00:00.000Z" itemprop="datePublished">January 5, 2021</time>
 	</a>
 
        
@@ -147,14 +146,11 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Ngày nay khi triết lý Agile được áp dụng ở mọi nơi. Cũng chính vì Tính nhanh và linh hoạt của Agile mà vai trò của quy trình CI/CD (Continuous Integration/ Continuous Delivery) lại càng trở lên cấp thiêt hơn bao giờ hết.</p>
-<p>Sau một thời gian mình triển khai các service từ Web app, Rest Api cho đến Database bằng cơm, và khi các service càng nhiều và phức tạp thì việc triển khai service bằng cơm trỏ lên khá mệt mỏi và thiêú chính xác. Do vậy mình đã quyết tâm áp dụng các giải pháp CI/CD vào các Project hiện tại, cũng là để chuẩn bị cho một tầm nhìn dài hạn hơn.</p>
+        <p>Mình đã có gần 1 năm kinh nghiệm làm triển khai ERP, cũng như 2 năm làm việc tại 1 công ty lớn để thấy được việc quản lý dự án cùng triết lý phát triển dự án quan trọng thế nào. Nhiều dự án quản lý theo mô hình truyền thống (waterfall, ..) đã gặp giới hạn về khả năng thích ứng trước sự thay đổi liên tục từ khách hàng và thời gian hoàn thiện sản phẩm chậm. Cá biệt, có dự án mà mình chứng kiến xa lầy tới 5 năm mà sản phẩm vẫn không hoàn thiện.</p>
+<p>Do vậy ngay từ đầu, team mình đã áp dụng mô hình Agile. Quả thực mô hình Agile đã thực sự hiệu quả và phù hợp với nguồn lực hiện có và được minh chứng bằng sự thành công của dự án. </p>
 <span id="more"></span>
 
-<p>CI/CD là một bộ đôi công việc, bao gồm CI (Continuous Integration) và CD (Continuous Delivery), ý nói là quá trình tích hợp (integration) thường xuyên, nhanh chóng hơn khi code cũng như thường xuyên cập nhật phiên bản mới (delivery).</p>
-<p>Ngày nay có rất nhiều công cụ hỗ trợ chúng ta trong quá trình CI/CD, mỗi công cụ đều có ưu và nhược điểm riêng, và để có thể ứng dụng chúng thì mỗi DevOps phải chuẩn bị cho mình môt nền tảng kiến thức vững chắc để có thể thực sự đáp ứng cả quy trình CI/CD.</p>
-<p>Trong series này, mình sẽ cố viết các bài với Jenkins và GitLab 9, các tool khác thì khi chúng ta nắm vững lý thuyết thì cũng dễ dàng triển khai thôi.</p>
-<img src="/img/CICD_intro_1.png"/>
+<p><em>Lưu ý: Tuy các kiến thức là thật nhưng các hoàn cảnh, nhân tố, data, cty G .. trong series là hoàn toàn hư cấu và mang tính minh hoạ.</em></p>
 
       
     </div>
@@ -162,7 +158,7 @@
       
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI-CD/" rel="tag">CI/CD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DevOps/" rel="tag">DevOps</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Full-Stack/" rel="tag">Full-Stack</a></li></ul>
 
       
     </footer>
@@ -172,19 +168,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/02/16/CI-CD%20with%20jenkins%20part%201/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/02/14/CI-CD/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          CI/CD chapter 1 - Jenkins/Github/EC2
+          CI/CD chapter 0 - Intro
         
       </div>
     </a>
   
   
-    <a href="/2021/01/05/Field%20Application%20chapter%202/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/12/08/Field%20Application%20chapter%201/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Field Application chapter 2 - Django REST framework</div>
+      <div class="article-nav-title">Field Application chapter 1 - Agile</div>
     </a>
   
 </nav>
