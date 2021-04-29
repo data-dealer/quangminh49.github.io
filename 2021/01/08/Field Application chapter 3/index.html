@@ -20,7 +20,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://quangminh49.github.io/img/Field_Application_2_django.png">
 <meta property="article:published_time" content="2021-01-07T17:00:00.000Z">
-<meta property="article:modified_time" content="2021-04-29T08:52:25.000Z">
+<meta property="article:modified_time" content="2021-04-29T09:51:41.432Z">
 <meta property="article:author" content="Minh Nguyen">
 <meta property="article:tag" content="Full-Stack">
 <meta name="twitter:card" content="summary">
@@ -161,14 +161,13 @@
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv venv </span><br><span class="line"><span class="built_in">source</span> venv activate</span><br><span class="line">pip install Django==3.0.5</span><br><span class="line">pip install djangorestframework==3.11.1</span><br></pre></td></tr></table></figure>
 
-
 <ol>
 <li>tạo mới dự án : </li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject fieldapi &amp;&amp; <span class="built_in">cd</span> fieldapi</span><br><span class="line">python manage.py startapp fieldapp</span><br></pre></td></tr></table></figure>
 
 <p>Bây giờ dự án đã có chút hình hài rồi. </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">|-- fieldapi</span><br><span class="line">|   |-- asgi.py</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- __pycache__</span><br><span class="line">|   |   |-- __init__.cpython-36.pyc</span><br><span class="line">|   |   &#96;-- settings.cpython-36.pyc</span><br><span class="line">|   |-- settings.py</span><br><span class="line">|   |-- urls.py</span><br><span class="line">|   &#96;-- wsgi.py</span><br><span class="line">|-- fieldapp</span><br><span class="line">|   |-- admin.py</span><br><span class="line">|   |-- apps.py</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- migrations</span><br><span class="line">|   |   &#96;-- __init__.py</span><br><span class="line">|   |-- models.py</span><br><span class="line">|   |-- tests.py</span><br><span class="line">|   &#96;-- views.py</span><br><span class="line">&#96;-- manage.py</span><br><span class="line">1 directory, 6 files</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">|-- fieldapi</span><br><span class="line">|   |-- asgi.py</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- settings.py</span><br><span class="line">|   |-- urls.py</span><br><span class="line">|   &#96;-- wsgi.py</span><br><span class="line">|-- fieldapp</span><br><span class="line">|   |-- admin.py</span><br><span class="line">|   |-- apps.py</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- migrations</span><br><span class="line">|   |   &#96;-- __init__.py</span><br><span class="line">|   |-- models.py</span><br><span class="line">|   |-- tests.py</span><br><span class="line">|   &#96;-- views.py</span><br><span class="line">&#96;-- manage.py</span><br></pre></td></tr></table></figure>
 
 
 
