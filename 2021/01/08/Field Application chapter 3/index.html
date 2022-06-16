@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Field Application chapter 3 - Django REST framework | Minh&#39;s Blog</title>
+  <title>Field Application chapter 3 - Django REST framework part 1 | Minh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="Full-Stack" />
@@ -13,14 +13,14 @@
   
   <meta name="description" content="Từ bài này Mình sẽ đi sâu hơn về phần kỹ thuật, bao gồm cả Software Architect và Coding, Phần Backend mình làm với Django REST framework nên kiến thức Python cơ bản là rất cần thiết cho các bạn nào mu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Field Application chapter 3 - Django REST framework">
+<meta property="og:title" content="Field Application chapter 3 - Django REST framework part 1">
 <meta property="og:url" content="https://quangminh49.github.io/2021/01/08/Field%20Application%20chapter%203/index.html">
 <meta property="og:site_name" content="Minh&#39;s Blog">
 <meta property="og:description" content="Từ bài này Mình sẽ đi sâu hơn về phần kỹ thuật, bao gồm cả Software Architect và Coding, Phần Backend mình làm với Django REST framework nên kiến thức Python cơ bản là rất cần thiết cho các bạn nào mu">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://quangminh49.github.io/img/Field_Application_2_django.png">
 <meta property="article:published_time" content="2021-01-07T17:00:00.000Z">
-<meta property="article:modified_time" content="2021-04-29T09:51:41.432Z">
+<meta property="article:modified_time" content="2021-05-01T05:05:56.679Z">
 <meta property="article:author" content="Minh Nguyen">
 <meta property="article:tag" content="Full-Stack">
 <meta name="twitter:card" content="summary">
@@ -129,7 +129,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      Field Application chapter 3 - Django REST framework
+      Field Application chapter 3 - Django REST framework part 1
     </h1>
   
 
@@ -156,7 +156,8 @@
 <li>Bộ docs của DRF rất đầy đủ, theo mình thấy là đầy đủ nhất trong các REST Framework</li>
 </ul>
 <p><em>Lưu ý: Tuy các kiến thức là thật nhưng các hoàn cảnh, nhân tố, data, cty G .. trong series là hoàn toàn hư cấu và mang tính minh hoạ.</em></p>
-<h1 id="Khoi-tao-du-an-voi-DRF"><a href="#Khoi-tao-du-an-voi-DRF" class="headerlink" title="Khởi tạo dự án với DRF"></a>Khởi tạo dự án với DRF</h1><ol>
+<h1 id="Khoi-tao-du-an-voi-DRF"><a href="#Khoi-tao-du-an-voi-DRF" class="headerlink" title="Khởi tạo dự án với DRF"></a>Khởi tạo dự án với DRF</h1><p>Phần này khá là đơn giản theo các bước sau:</p>
+<ol>
 <li>Tạo virtual environment - môi trường ảo cho Python: </li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv venv </span><br><span class="line"><span class="built_in">source</span> venv activate</span><br><span class="line">pip install Django==3.0.5</span><br><span class="line">pip install djangorestframework==3.11.1</span><br></pre></td></tr></table></figure>
@@ -164,12 +165,18 @@
 <ol>
 <li>tạo mới dự án : </li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject fieldapi &amp;&amp; <span class="built_in">cd</span> fieldapi</span><br><span class="line">python manage.py startapp fieldapp</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject fieldapi </span><br></pre></td></tr></table></figure>
 
-<p>Bây giờ dự án đã có chút hình hài rồi. </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">|-- fieldapi</span><br><span class="line">|   |-- asgi.py</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- settings.py</span><br><span class="line">|   |-- urls.py</span><br><span class="line">|   &#96;-- wsgi.py</span><br><span class="line">|-- fieldapp</span><br><span class="line">|   |-- admin.py</span><br><span class="line">|   |-- apps.py</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- migrations</span><br><span class="line">|   |   &#96;-- __init__.py</span><br><span class="line">|   |-- models.py</span><br><span class="line">|   |-- tests.py</span><br><span class="line">|   &#96;-- views.py</span><br><span class="line">&#96;-- manage.py</span><br></pre></td></tr></table></figure>
+<h1 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h1><p>Model là thành phần đầu tiên chúng ta cần cấu hình, chứa các field mang kiểu dữ liệu được định nghĩa và sẽ ánh xạ tới một bảng duy nhất trong database.</p>
+<ul>
+<li>Mỗi model là một Python Class kế thừa từ django.db.models.Model</li>
+<li>Mỗi thuộc tính trong Model đại diện cho một database field</li>
+</ul>
+<p>model tại myapp/models.py: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    first_name = models.CharField(max_length=<span class="number">30</span>)</span><br><span class="line">    last_name = models.CharField(max_length=<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
 
-
+<p>tương đương với sql:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> myapp_person (</span><br><span class="line">    &quot;id&quot; serial <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    &quot;first_name&quot; <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    &quot;last_name&quot; <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
 
       
@@ -214,7 +221,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Khoi-tao-du-an-voi-DRF"><span class="nav-number">1.</span> <span class="nav-text">Khởi tạo dự án với DRF</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Khoi-tao-du-an-voi-DRF"><span class="nav-number">1.</span> <span class="nav-text">Khởi tạo dự án với DRF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Model"><span class="nav-number">2.</span> <span class="nav-text">Model</span></a></li></ol>
     
     </div>
   </aside>
@@ -241,7 +248,7 @@
 
   <div class="clearfix container">
       <div class="site-info">
-	      &copy; 2021 Minh&#39;s Blog All Rights Reserved.
+	      &copy; 2022 Minh&#39;s Blog All Rights Reserved.
         
       </div>
       <div class="site-credit">
